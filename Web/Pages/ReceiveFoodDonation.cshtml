@@ -1,0 +1,56 @@
+﻿@* @page
+@model Web.Pages.ReceiveFoodDonationModel
+@{
+}
+@{
+    Layout = "_Layout";
+}
+@if (TempData["Message"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["Message"]
+    </div>
+}
+
+
+<h2>Available Donations</h2>
+
+<form asp-action="DonationSearchView" method="get" class="form-inline">
+    <div class="form-group mb-2">
+        <label for="location" class="sr-only">Location</label>
+        <input type="text" class="form-control" id="location" name="location" placeholder="Location" />
+    </div>
+    <div class="form-group mx-sm-3 mb-2">
+        <label for="minQuantity" class="sr-only">Min Quantity</label>
+        <input type="number" class="form-control" id="minQuantity" name="minQuantity" placeholder="Min Quantity" />
+    </div>
+    <div class="form-group mx-sm-3 mb-2">
+        <label for="maxQuantity" class="sr-only">Max Quantity</label>
+        <input type="number" class="form-control" id="maxQuantity" name="maxQuantity" placeholder="Max Quantity" />
+    </div>
+    <button type="submit" class="btn btn-primary mb-2">Search</button>
+</form>
+
+<div class="donation-list">
+    @foreach (var donation in Model)
+    {
+        <div class="donation-item">
+            <img src="@donation.PrimaryImageUrl" alt="Donation Image" />
+            <h3>@donation.FoodDetails</h3>
+            <p>Quantity: @donation.Quantity</p>
+            <p>Pick-Up Location: @donation.PickUpLocation</p>
+            <p>Available: @donation.ExpirationDate</p>
+            @if (donation.CanClaim)
+            {
+                <button class="btn btn-primary">Claim Donation</button>
+            }
+            else
+            {
+                <button class="btn btn-secondary" disabled>Cannot Claim</button>
+                <p class="text-danger">@donation.ClaimRestrictionReason</p>
+            }
+        </div>
+    }
+</div>
+
+ *@

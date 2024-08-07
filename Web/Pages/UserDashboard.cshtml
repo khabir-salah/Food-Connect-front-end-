@@ -1,0 +1,164 @@
+﻿@page "/UserDashBoard"
+
+@{
+    Layout = "_Layout";
+}
+@if (TempData["Message"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["Message"]
+    </div>
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Welfare - Free Bootstrap 4 Template by Colorlib</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link href="https://fonts.googleapis.com/css?family=Dosis:200,300,400,500,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Overpass:300,400,400i,600,700" rel="stylesheet">
+
+    <link rel="stylesheet" href="~/Template/css1/open-iconic-bootstrap.min.css">
+    <link rel="stylesheet" href="~/Template/css1/animate.css">
+
+    <link rel="stylesheet" href="~/Template/css1/owl.carousel.min.css">
+    <link rel="stylesheet" href="~/Template/css1/owl.theme.default.min.css">
+    <link rel="stylesheet" href="~/Template/css1/magnific-popup.css">
+
+    <link rel="stylesheet" href="~/Template/css1/aos.css">
+
+    <link rel="stylesheet" href="~/Template/css1/ionicons.min.css">
+
+    <link rel="stylesheet" href="~/Template/css1/bootstrap-datepicker.css">
+    <link rel="stylesheet" href="~/Template/css1/jquery.timepicker.css">
+
+    <link rel="stylesheet" href="~/Template/css1/flaticon.css">
+    <link rel="stylesheet" href="~/Template/css1/icomoon.css">
+    <link rel="stylesheet" href="~/Template/css1/style.css">
+
+    <style>
+        /* Custom styles to adjust spacing for sticky navbar */
+        #section-counter {
+            padding-top: 100px; /* Adjust the padding-top value to match your navbar height */
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Add your sticky navbar here if not already included -->
+
+    <section class="ftco-counter ftco-intro" id="section-counter">
+        <div class="container">
+            <div class="row no-gutters">
+                <div class="col-md-5 d-flex justify-content-center counter-wrap ftco-animate">
+                    <div class="block-18 color-1 align-items-stretch">
+                        <div class="text">
+                            <span>Served Over</span>
+                            <strong class="number" data-number="14328">0</strong>
+                            <span>Children in 190 countries in the world</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md d-flex justify-content-center counter-wrap ftco-animate">
+                    <div class="block-18 color-2 align-items-stretch">
+                        <div class="text">
+                            <h3 class="mb-4">Donate Money</h3>
+                            <p>Even the all-powerful Pointing has no control about the blind texts.</p>
+                            <p><a href="#" class="btn btn-white px-3 py-2 mt-2">Donate Now</a></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md d-flex justify-content-center counter-wrap ftco-animate">
+                    <div class="block-18 color-3 align-items-stretch">
+                        <div class="text">
+                            <h3 class="mb-4">Be a Volunteer</h3>
+                            <p>Even the all-powerful Pointing has no control about the blind texts.</p>
+                            <p><a href="#" class="btn btn-white px-3 py-2 mt-2">Be A Volunteer</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Other content here -->
+
+</body>
+</html>
+
+
+<section class="ftco-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 d-flex align-self-stretch ftco-animate">
+                <div class="media block-6 d-flex services p-3 py-4 d-block">
+                    <div class="icon d-flex mb-3"><span class="flaticon-donation-1"></span></div>
+                    <div class="media-body pl-4">
+                        <h3 class="heading">Make Donation</h3>
+                        <p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 d-flex align-self-stretch ftco-animate">
+                <div class="media block-6 d-flex services p-3 py-4 d-block">
+                    <div class="icon d-flex mb-3"><span class="flaticon-charity"></span></div>
+                    <div class="media-body pl-4">
+                        <h3 class="heading">Become A Volunteer</h3>
+                        <p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 d-flex align-self-stretch ftco-animate">
+                <div class="media block-6 d-flex services p-3 py-4 d-block">
+                    <div class="icon d-flex mb-3"><span class="flaticon-donation"></span></div>
+                    <div class="media-body pl-4">
+                        <h3 class="heading">Sponsorship</h3>
+                        <p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+
+
+
+
+
+
+<section class="ftco-section-3 img" style="background-image: url(images/bg_3.jpg);">
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="row d-md-flex">
+            <div class="col-md-6 d-flex ftco-animate">
+                <div class="img img-2 align-self-stretch" style="background-image: url(images/bg_4.jpg);"></div>
+            </div>
+            <div class="col-md-6 volunteer pl-md-5 ftco-animate">
+                <h3 class="mb-3">Be a volunteer</h3>
+                <form action="#" class="volunter-form">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Your Name">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Your Email">
+                    </div>
+                    <div class="form-group">
+                        <textarea name="" id="" cols="30" rows="3" class="form-control" placeholder="Message"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Send Message" class="btn btn-white py-3 px-5">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+

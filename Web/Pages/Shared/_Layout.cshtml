@@ -1,0 +1,212 @@
+﻿
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Food Connect Navbar</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- FontAwesome for icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <style>
+        .navbar {
+            background-color: #f8f9fa; /* Light background for contrast */
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar-nav .nav-item .nav-link {
+            color: #000; /* Black text color for better visibility */
+            padding: 15px;
+        }
+
+            .navbar-nav .nav-item .nav-link:hover {
+                color: #007bff; /* Change color on hover for a nice effect */
+            }
+
+        .dropdown-menu a {
+            color: #333;
+        }
+
+        .notification-bell {
+            position: relative;
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+            .notification-bell .badge {
+                position: absolute;
+                top: -5px;
+                right: -10px;
+                background: red;
+                color: white;
+                border-radius: 50%;
+                padding: 5px 8px;
+                font-size: 10px;
+            }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <a class="navbar-brand" href="#">Food Connect</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav ml-auto">
+                <!-- Dropdown for Profile -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="profileDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Profile
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="profileDropdown">
+                        <a class="dropdown-item" asp-action="ViewProfile" asp-controller="User">View Profile</a>
+                        <a class="dropdown-item" asp-action="UpdateProfile" asp-controller="User">Edit Profile</a>
+                    </div>
+                </li>
+                <!-- Donate Food Dropdown -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="donateFoodDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Donate Food
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="donateFoodDropdown">
+                        <a class="dropdown-item"  asp-page="/CreateDonation">Make a Donation</a>
+                        <a class="dropdown-item"  asp-page="/ViewDonationCategory">View Donations</a>
+                    </div>
+                </li>
+                <!-- Other Navigation Items -->
+                <li class="nav-item">
+                    <a class="nav-link" asp-controller="Donation" asp-action="GetClaimedDonations">Track Food Donated</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" asp-action="ReceiveFoodDonation" asp-controller="Donation">Receive Food Donation</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">View Reviews</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link notification-bell" href="#">
+                        <i class="fas fa-bell"></i>
+                        <span class="badge">3</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="ftco-footer ftco-section img">
+        <div class="overlay"></div>
+        <div class="container">
+            <div class="row mb-5">
+                <div class="col-md-3">
+                    <div class="ftco-footer-widget mb-4">
+                        <h2 class="ftco-heading-2">About Us</h2>
+                        <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
+                        <ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-5">
+                            <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
+                            <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
+                            <li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="ftco-footer-widget mb-4">
+                        <h2 class="ftco-heading-2">Recent Blog</h2>
+                        <div class="block-21 mb-4 d-flex">
+                            <a class="blog-img mr-4" style="background-image: url(images/image_1.jpg);"></a>
+                            <div class="text">
+                                <h3 class="heading"><a href="#">Even the all-powerful Pointing has no control about</a></h3>
+                                <div class="meta">
+                                    <div><a href="#"><span class="icon-calendar"></span> July 12, 2018</a></div>
+                                    <div><a href="#"><span class="icon-person"></span> Admin</a></div>
+                                    <div><a href="#"><span class="icon-chat"></span> 19</a></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="block-21 mb-4 d-flex">
+                            <a class="blog-img mr-4" style="background-image: url(images/image_2.jpg);"></a>
+                            <div class="text">
+                                <h3 class="heading"><a href="#">Even the all-powerful Pointing has no control about</a></h3>
+                                <div class="meta">
+                                    <div><a href="#"><span class="icon-calendar"></span> July 12, 2018</a></div>
+                                    <div><a href="#"><span class="icon-person"></span> Admin</a></div>
+                                    <div><a href="#"><span class="icon-chat"></span> 19</a></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="ftco-footer-widget mb-4">
+                        <h2 class="ftco-heading-2">Have a Questions?</h2>
+                        <div class="block-23 mb-3">
+                            <ul>
+                                <li><span class="icon icon-map-marker"></span><span class="text">203 Fake St. Mountain View, San Francisco, California, USA</span></li>
+                                <li><a href="#"><span class="icon icon-phone"></span><span class="text">+2 392 3929 210</span></a></li>
+                                <li><a href="#"><span class="icon icon-envelope"></span><span class="text">info@yourdomain.com</span></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </footer>
+
+
+
+    <!-- loader -->
+    <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee" /><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00" /></svg></div>
+
+
+    <script src="~/Template/js1/jquery.min.js"></script>
+    <script src="~/Template/js1/jquery-migrate-3.0.1.min.js"></script>
+    <script src="~/Template/js1/popper.min.js"></script>
+    <script src="~/Template/js1/bootstrap.min.js"></script>
+    <script src="~/Template/js1/jquery.easing.1.3.js"></script>
+    <script src="~/Template/js1/jquery.waypoints.min.js"></script>
+    <script src="~/Template/js1/jquery.stellar.min.js"></script>
+    <script src="~/Template/js1/owl.carousel.min.js"></script>
+    <script src="~/Template/js1/jquery.magnific-popup.min.js"></script>
+    <script src="~/Template/js1/aos.js"></script>
+    <script src="~/Template/js1/jquery.animateNumber.min.js"></script>
+    <script src="~/Template/js1/bootstrap-datepicker.js"></script>
+    <script src="~/Template/js1/jquery.timepicker.min.js"></script>
+    <script src="~/Template/js1/scrollax.min.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
+    <script src="~/Template/js1/google-map.js"></script>
+    <script src="~/Template/js1/main.js"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    @* <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script> *@
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!-- FontAwesome for icons -->
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    @* <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script> *@
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
+
+
+
+
+
+
+
+

@@ -1,0 +1,138 @@
+﻿@page
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+
+@if (TempData["Message"] != null)
+{
+    <div class="alert alert-danger">
+        @TempData["Message"]
+    </div>
+}
+
+<head>
+    <title>Organization Head Registration</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://fonts.googleapis.com/css?family=Mansalva|Roboto&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            background-image: url('https://images.unsplash.com/photo-1529253355930-c7f2d4f2121f');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            font-family: 'Roboto', sans-serif,;
+        }
+
+        .registration-form {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            /* margin: 100px auto; */
+            max-width: 500px;
+        }
+
+            .registration-form h2 {
+                margin-bottom: 20px;
+                font-family: 'Mansalva', cursive;
+                font-size: 2.5rem;
+                color: #333;
+                text-align: center;
+            }
+
+            .registration-form .form-group label {
+                font-weight: bold;
+                color: #555;
+            }
+
+        .custom-img {
+            max-width: 100%;
+            height: auto;
+            padding: 20px;
+        }
+
+        .registration-form {
+            padding: 20px;
+        }
+
+
+            .registration-form .btn-primary {
+                background-color: #ff6f61;
+                border-color: #ff6f61;
+                font-size: 1.1rem;
+                padding: 10px;
+            }
+
+                .registration-form .btn-primary:hover {
+                    background-color: #ff4f41;
+                    border-color: #ff4f41;
+                }
+
+            .registration-form input {
+                height: calc(2.25rem + 2px);
+                padding: 10px 12px;
+            }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="row justify-content-center align-items-center">
+            <div class="col-md-6">
+                <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.webp"
+                     class="img-fluid custom-img" alt="Sample image">
+            </div>
+            <div class="col-md-6">
+                <div class="registration-form">
+                    <h2>Registering As An Individual</h2>
+                    <form  method="post">
+                        <div class="form-group">
+                            <label for="firstName">First Name</label>
+                            <input type="text" class="form-control" id="firstName" name="FirstName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="lastName">Last Name</label>
+                            <input type="text" class="form-control" id="lastName" name="LastName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phoneNumber">Phone Number</label>
+                            <input type="text" class="form-control" id="phoneNumber" name="PhoneNumber" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="nin">NIN</label>
+                            <input type="text" class="form-control" id="nin" name="Nin">
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" class="form-control" id="email" name="Email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Password</label>
+                            <input type="password" class="form-control" id="password" name="Password" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-block">Register</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    </div>
+
+    </div>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+
+</html>
+
+
+

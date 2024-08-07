@@ -1,0 +1,139 @@
+﻿@page
+@model Web.Pages.ViewDonationCategoryModel
+@{
+}
+
+@if (TempData["Message"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["Message"]
+    </div>
+}
+
+@{
+    Layout = "_Layout";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Donations</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- FontAwesome for icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: 'Arial', sans-serif;
+        }
+
+        .donation-container {
+            margin-top: 50px;
+        }
+
+        .donation-card {
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        .donation-header {
+            background-color: #007bff;
+            color: #fff;
+            border-radius: 10px 10px 0 0;
+            padding: 15px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .donation-body {
+            padding: 20px;
+        }
+
+        .donation-type {
+            font-weight: bold;
+            font-size: 1.2em;
+            color: #333;
+        }
+
+        .badge-notification {
+            background-color: red;
+            color: white;
+            font-size: 0.9em;
+            border-radius: 12px;
+            padding: 5px 10px;
+            margin-left: 10px;
+        }
+
+        .donation-type i {
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container donation-container">
+        <h2 class="text-center mb-4">Your Donations</h2>
+        <div class="row">
+
+            <!-- Pending Donations -->
+            <div class="col-md-6">
+                <div class="card donation-card">
+                    <div class="donation-header">Pending Donations</div>
+                    <div class="card-body donation-body">
+                        <span class="donation-type"><i class="fas fa-hourglass-half"></i><a asp-page="PendingDonations" >Pending</a></span>
+                        <span class="badge badge-notification">@Model.model.PendingCount</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Approved Donations -->
+            <div class="col-md-6">
+                <div class="card donation-card">
+                    <div class="donation-header">Approved Donations</div>
+                    <div class="card-body donation-body">
+                        <span class="donation-type"><i class="fas fa-check-circle"></i><a asp-action="ApprovedDonations" asp-controller="Donation">Approved Donations</a></span>
+                        <span class="badge badge-notification">@Model.model.ApproveCount</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Disapproved Donations -->
+            <div class="col-md-6">
+                <div class="card donation-card">
+                    <div class="donation-header">Disapproved Donations</div>
+                    <div class="card-body donation-body">
+                        <span class="donation-type"><i class="fas fa-times-circle"></i><a asp-action="DisapprovedDonations" asp-controller="Donation">Disapproved Donations</a></span>
+                        <span class="badge badge-notification">@Model.model.DisapproveCount</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Received Donations -->
+            <div class="col-md-6">
+                <div class="card donation-card">
+                    <div class="donation-header">Received Donations</div>
+                    <div class="card-body donation-body">
+                        <span class="donation-type"><i class="fas fa-gift"></i><a asp-action="ReceivedDonations" asp-controller="Donation">Received Donations</a></span>
+                        <span class="badge badge-notification">@Model.model.ReceivedCount</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    @*  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>  *@ 
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>
+
+ 

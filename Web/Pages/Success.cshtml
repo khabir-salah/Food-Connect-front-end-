@@ -1,0 +1,26 @@
+﻿@page
+@model Web.Pages.SuccessModel
+@{
+}
+@{
+    ViewData["Title"] = "Success";
+    Layout = "_Layout";
+}
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+
+<div class="container mt-5 text-center">
+    <!-- Success Image or Icon -->
+    <img <i class="fas fa-check-circle text-success" style="font-size: 100px;"></i>
+    class="img-fluid mb-4" style="max-width: 150px;">
+
+    <!-- Success Message -->
+    <h1 class="display-4 text-success">Action Successful!</h1>
+    <p class="lead">Thank you for your action. Everything was processed successfully.</p>
+
+    <!-- Additional Info -->
+    <p>If you have any questions or need further assistance, feel free to contact our support team.</p>
+
+    <!-- Back to Home or Other Action -->
+    <a href="@Url.Action("/UserDashboard")" class="btn btn-primary mt-3">Go to Homepage</a>
+    <a href="@Url.Action("/UserDashboard")" class="btn btn-secondary mt-3">Go to Dashboard</a>
+</div>

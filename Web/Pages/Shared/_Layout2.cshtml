@@ -1,0 +1,186 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="~/Template/css/Dashboard.css">
+    <link rel="stylesheet" href="~/Template/css/Department.css">
+    <link rel="stylesheet" href="~/Template/css/Staff.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+    <style>
+        /* Styles for the notification badge */
+        .badge-notification {
+            background-color: red;
+            color: white;
+            padding: 3px 8px;
+            border-radius: 50%;
+            font-size: 12px;
+            vertical-align: top;
+            margin-left: 5px;
+        }
+
+        /* Styles for the dropdown menu */
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: palegreen;
+            min-width: 200px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+        }
+
+            .dropdown-content a {
+                color: black;
+                padding: 12px 16px;
+                text-decoration: none;
+                display: block;
+            }
+
+                .dropdown-content a:hover {
+                    background-color: rosybrown;
+                }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .dropdown a {
+            display: block;
+        }
+
+        .menu-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        /* Icon styling */
+        .menu-icon {
+            margin-right: 8px;
+        }
+    </style>
+
+</head>
+<body>
+    <section id="menu">
+        <div class="logo">
+            <img src="~/Template/images/bk.jpeg" alt="">
+            <h2>Food Connect</h2>
+        </div>
+
+        <div class="items">
+            <li>
+                <a asp-action="" asp-controller="">
+                    <i class="fa fa-dashboard fas menu-icon"></i> DashBoard
+                </a>
+            </li>
+            <li>
+                <a asp-page="/RegisterManager" >
+                    <i class="fa fa-home fas menu-icon"></i> Create Manager
+                </a>
+            </li>
+
+            <!-- View Donations Dropdown -->
+            <li class="dropdown">
+                <a asp-action="" asp-controller="" class="menu-item">
+                    <i class="fa fa-group fas menu-icon"></i> View Donations
+                    <span class="badge-notification">2</span>
+                </a>
+                <div class="dropdown-content">
+                    <a asp-page="/AllPending" asp-route-status="1">
+                        <i class="fa fa-clock-o menu-icon"></i> Pending
+                        <span class="badge-notification">5</span>
+                    </a>
+                    <a asp-page="/AllDonations" asp-route-status="2">
+                        <i class="fa fa-check-circle menu-icon"></i> Approved
+                        <span class="badge-notification">7</span>
+                    </a>
+                    <a asp-page="/AllDonations" asp-route-status="3">
+                        <i class="fa fa-times-circle menu-icon"></i> Disapproved
+                        <span class="badge-notification">7</span>
+                    </a>
+                    <a asp-page="/AllDonations" asp-route-status="4">
+                        <i class="fa fa-truck menu-icon"></i> Received
+                        <span class="badge-notification">7</span>
+                    </a>
+                    <a asp-page="/AllDonations" asp-route-status="5">
+                        <i class="fa fa-flag menu-icon"></i> Claim
+                        <span class="badge-notification">9</span>
+                    </a>
+                    <a asp-page="/AllDonations" asp-route-status="6">
+                        <i class="fa fa-box-open menu-icon"></i> Available
+                        <span class="badge-notification">7</span>
+                    </a>
+                </div>
+
+            </li>
+
+            <!-- View All Users Dropdown -->
+            <li class="dropdown">
+                <a asp-action="" asp-controller="" class="menu-item">
+                    <i class="fa fa-users fas menu-icon"></i> View All Users
+                    <span class="badge-notification">2</span>
+                </a>
+                <div class="dropdown-content">
+                    <a asp-action="" asp-controller="">
+                        <i class="fa fa-user-tie menu-icon"></i> Managers
+                        <span class="badge-notification">3</span>
+                    </a>
+                    <a asp-action="" asp-controller="">
+                        <i class="fa fa-home menu-icon"></i> Family
+                        <span class="badge-notification">3</span>
+                    </a>
+                    <a asp-action="" asp-controller="">
+                        <i class="fa fa-building menu-icon"></i> Organization
+                        <span class="badge-notification">4</span>
+                    </a>
+                    <a asp-action="" asp-controller="">
+                        <i class="fa fa-user menu-icon"></i> Individual
+                        <span class="badge-notification">6</span>
+                    </a>
+                </div>
+            </li>
+
+            <li>
+                <a asp-action="" asp-controller="">
+                    <i class="fa fa-envelope fas menu-icon"></i> Message Manager
+                </a>
+            </li>
+            <li>
+                <a asp-action="" asp-controller="">
+                    <i class="fa fa-bell fas menu-icon"></i> Notification
+                </a>
+            </li>
+
+            <li class="signout">
+                <a asp-action="LogOut" asp-controller="Identity">
+                    <i class="fa fa-sign-out"></i> Sign Out
+                </a>
+            </li>
+
+        </div>
+    </section>
+    <section id="interface">
+        <div class="container">
+            <main role="main" class="pb-3">
+                @RenderBody()
+            </main>
+        </div>
+    </section>
+
+    <script>
+        $('#menu-btn').click(function () {
+            $('#menu').toggleClass("active");
+        });
+    </script>
+</body>
+</html>

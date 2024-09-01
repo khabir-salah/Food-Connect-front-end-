@@ -14,10 +14,19 @@ namespace Gateway.Models.Donation
         public DonationStatus Status { get; set; }
         public DateTime PickUpTime { get; set; }
         public string PickUpLocation { get; set; } = default!;
-        public ICollection<string> DonationImages { get; set; } = null!;
+        public string? DonationImages { get; set; } 
         public string PrimaryImageUrl { get; set; } = null!;
         public string ClaimRestrictionReason { get; set; }
         public bool CanClaim { get; set; }
+        public string  UserEmail { get; set; }
+        public string  UserRole { get; set; }
+        public string  Name { get; set; }
+        public string  DonationMadeBy { get; set; }
+        public Guid  DonationId { get; set; }
+        public string? RecipientName { get; set; }
+        public string? RecipientEmail { get; set; }
+        public string? RecipientRole { get; set; }
+        public string? Address { get; set; }
     }
 
     public enum DonationStatus

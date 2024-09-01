@@ -20,10 +20,11 @@ namespace Gateway.Models.Donation
         public DonationStatus Status { get; set; }
         public DateTime PickUpTime { get; set; }
         public string PickUpLocation { get; set; } = default!;
-        public ICollection<string> DonationImages { get; set; }
+        public string DonationImages { get; set; }
         public string PrimaryImageUrl { get; set; }
         public Guid DonationId { get; set; }
         public Guid RecipientId { get; set; }
+        public Guid UserId { get; set; }
     }
 
     public class MessageCommandModel

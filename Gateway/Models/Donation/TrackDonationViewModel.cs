@@ -31,9 +31,8 @@ namespace Gateway.Models.Donation
     {
         public Guid DonorId { get; set; }
         public Guid RecipientId { get; set; }
-        public Guid DonationId { get; set; }
+        public Guid UserId { get; set; }
         public string? Content { get; set; }
         public DateTime SentAt { get; set; }
-        public bool IsRead { get; set; }
     }
 }

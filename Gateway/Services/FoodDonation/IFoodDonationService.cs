@@ -15,25 +15,31 @@ namespace Gateway.Services.FoodDonation
         Task<bool> CreateDonation(CreateDonationModels request, string token);
 
         Task<DonationTypeViewModel> ViewDonationType(string token);
+        Task<PaginatedResponse<UserDonationViewModel>> ReceivableFoodDonation(string token, int PageNumber = 1, int PageSize = 30);
+        Task<DonationTypeViewModel> DonationCount(string token);
+        Task<bool> DispproveByManager(DonationDisapproveModel request, string token);
+        Task<ICollection<UserDonationViewModel>> UserExpiredDonations(string token);
+        Task<ICollection<UserDonationViewModel>> UserPendingDonations( string token);
+        Task<bool> ApproveByManager(Guid donationId, string token);
+        Task<PaginatedResponse<UserDonationViewModel>> SearchDonations(string token, string location, int? minQuantity, int? maxQuantity);
+        Task<PaginatedResponse<AllDonationViewModel>> AllDonations(DonationsModel choice,  string token, int PageNumber , int PageSize);
 
-        Task<UserDonationViewModel> UserPendingDonations( string token);
-
-        Task<UserDonationViewModel> UserApprovedDonations();
+        Task<ICollection<UserDonationViewModel>> UserApprovedDonations(string token);
 
 
-        Task<UserDonationViewModel> UserReceivedDonations();
+        Task<ICollection<UserDonationViewModel>> UserReceivedDonations(string token);
 
-        Task<UserDonationViewModel> UserDisapprovedDonations();
+        Task<ICollection<UserDonationViewModel>> UserDisapprovedDonations(string token);
 
         Task<TrackDonationViewModel> TrackDonation(Guid donationId);
 
-        Task<UserDonationViewModel> GetClaimedDonations();
+        Task<ICollection<UserDonationViewModel>> GetClaimedDonations(string token);
+        Task<ICollection<UserDonationViewModel>> GetClaimedDonationsByOther(string token);
+        Task<bool> ClaimDonation(Guid donationId, string token);
 
-        Task<bool> SendMessage(SendDonationMessageModel model);
+        Task<ICollection<UserDonationViewModel>> SearchAllDonations(string token, string location, int? minQuantity, int? maxQuantity);
+        Task<PaginatedResponse<UserDonationViewModel>> ReceiveFoodDonation(string token, int PageNumber = 1, int PageSize = 30);
 
-        Task<UserDonationViewModel> ReceiveFoodDonation();
-
-        Task<DonationResponseCommandModel> SearchDonations(string location, int? minQuantity, int? maxQuantity);
 
 
 

@@ -98,11 +98,11 @@
                         </div>
                         @* <input type="hidden" name="UserId" value="@Model.UserId" /> *@ 
                         <div class="form-group">
-                            <label for="quantity">Quantity (in kg)</label>
+                            <label for="quantity">Estimated Beneficiary</label>
                             <input type="number" class="form-control" id="quantity" name="Quantity" required>
                         </div>
                         <div class="form-group">
-                            <label for="expirationDate">Expiration Date</label>
+                            <label for="expirationDate">Last Consumption Date(Unedible food will not be availble to claim)</label>
                             <input type="date" class="form-control" id="expirationDate" name="ExpirationDate" required>
                         </div>
                         <div class="form-group">
@@ -119,7 +119,7 @@
                             <img id="primaryImagePreview" class="img-preview" src="#" alt="Primary Image Preview" style="display:none;">
                         </div>
                         <div class="form-group">
-                            <label for="donationImages">Additional Images (optional)</label>
+                            <label for="donationImages">Additional Image</label>
                             <input type="file" class="form-control-file" id="donationImages" name="DonationImages" accept="image/*" multiple>
                             <div id="donationImagesPreview" class="mt-2"></div>
                         </div>

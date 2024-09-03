@@ -1,4 +1,6 @@
+using Gateway.Models.Donation;
 using Gateway.Services.FoodDonation;
+using Mapster;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
@@ -11,8 +13,15 @@ namespace Web.Pages
         {
             _foodDonationService = foodDonationService;
         }
-        public void OnGet()
+
+        [BindProperty]
+        public ICollection<UserDonationViewModel> model { get; set; }
+        public async Task<IActionResult> OnGet()
         {
+            var token = HttpContext.Session.GetString("JWToken");
+            var pendingDonation = await _foodDonationService.UserPendingDonations(token);
+            model = pendingDonation.Adapt<ICollection<UserDonationViewModel>>();
+            return Page();
         }
     }
 }

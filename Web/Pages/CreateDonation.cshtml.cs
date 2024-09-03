@@ -41,8 +41,7 @@ namespace Web.Pages
                 var send = await _foodDonationService.CreateDonation(model, token);
                 if(send)
                 {
-                    TempData["Message"] = "Food Donation Created Successfully";
-                    return RedirectToAction("/Success");
+                    return RedirectToPage("/Success");
                 }
                 TempData["Message"] = "Food Donation Creation Failed";
                 return Page();

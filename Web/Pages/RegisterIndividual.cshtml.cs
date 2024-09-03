@@ -27,7 +27,7 @@ namespace Web.Pages
                 var send = await _registerService.RegisterIndividual(ViewModel);
                 if (send)
                 {
-                    return RedirectToAction("/login");
+                    return RedirectToPage("/RegistrationSuccess");
                 }
                 TempData["Message"] = "Registration Failed. Make Sure All Data Are Correct";
                 return Page();

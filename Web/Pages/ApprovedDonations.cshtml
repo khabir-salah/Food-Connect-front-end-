@@ -1,4 +1,4 @@
-﻿@* @page
+﻿@page
 @model Web.Pages.ApprovedDonationsModel
 
 @if (TempData["Message"] != null)
@@ -10,6 +10,7 @@
 
 @{
     Layout = "_Layout";
+    var baseUrl = "https://localhost:7005";
 }
 
 
@@ -45,7 +46,7 @@
             position: absolute;
             top: 10px;
             right: 10px;
-            background-color: yellow;
+            background-color: lawngreen;
             color: #333;
             padding: 5px 10px;
             font-weight: bold;
@@ -71,27 +72,37 @@
 
     <div class="container mt-5">
         <h2 class="text-center mb-4">Approved Donations</h2>
-        <div class="row">
-            @foreach (var donation in Model)
-            {
-                <div class="col-md-6 col-lg-4">
-                    <div class="card donation-card">
-                        <div class="donation-status">
-                            @donation.Status
-                        </div>
-                        <img src="@donation.PrimaryImageUrl" alt="Donation Image">
-                        <div class="donation-details">
-                            <h5>@donation.FoodDetails</h5>
-                            <p><strong>Quantity:</strong> @donation.Quantity</p>
-                            <p><strong>Expiration Date:</strong> @donation.ExpirationDate.ToShortDateString()</p>
-                            <p><strong>Pick-Up Time:</strong> @donation.PickUpTime.ToString("hh:mm tt")</p>
-                            <p><strong>Pick-Up Location:</strong> @donation.PickUpLocation</p>
+
+        @if (Model.model == null || !Model.model.Any())
+        {
+            <p class="text-center">No Approved Donations At The Moment</p>
+        }
+        else
+        {
+            <div class="row">
+                @foreach (var donation in Model.model)
+                {
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card donation-card">
+                            <div class="donation-status">
+                                @donation.Status
+                            </div>
+                            <img src="@($"{baseUrl}{donation.PrimaryImageUrl}")" alt="Donation Image" class="img-fluid">
+                            <div class="donation-details">
+                                <h5>Details</h5>
+                                <p><strong>Food Details:</strong> @donation.FoodDetails</p>
+                                <p><strong>Quantity:</strong> @donation.Quantity</p>
+                                <p><strong>Expiration Date:</strong> @donation.ExpirationDate.ToShortDateString()</p>
+                                <p><strong>Pick-Up Time:</strong> @donation.PickUpTime.ToString("hh:mm tt")</p>
+                                <p><strong>Pick-Up Location:</strong> @donation.PickUpLocation</p>
+                            </div>
                         </div>
                     </div>
-                </div>
-            }
-        </div>
+                }
+            </div>
+        }
     </div>
+
 
     <!-- Bootstrap JS and dependencies -->
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
@@ -101,4 +112,3 @@
 
 
 
- *@

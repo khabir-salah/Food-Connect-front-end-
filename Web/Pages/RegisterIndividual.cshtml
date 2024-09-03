@@ -1,4 +1,5 @@
 ﻿@page
+@model Web.Pages.RegisterIndividualModel
 @{
     Layout = null;
 }
@@ -14,7 +15,7 @@
 }
 
 <head>
-    <title>Organization Head Registration</title>
+    <title>Individual Registration</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link href="https://fonts.googleapis.com/css?family=Mansalva|Roboto&display=swap" rel="stylesheet">
@@ -85,7 +86,7 @@
     <div class="container">
         <div class="row justify-content-center align-items-center">
             <div class="col-md-6">
-                <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.webp"
+                <img src="~/Images/hero_1.jpg"
                      class="img-fluid custom-img" alt="Sample image">
             </div>
             <div class="col-md-6">
@@ -94,7 +95,7 @@
                     <form  method="post">
                         <div class="form-group">
                             <label for="firstName">First Name</label>
-                            <input type="text" class="form-control" id="firstName" name="FirstName" required>
+                            <input type="text" class="form-control" id="firstName" name="FirstName"  required>
                         </div>
                         <div class="form-group">
                             <label for="lastName">Last Name</label>

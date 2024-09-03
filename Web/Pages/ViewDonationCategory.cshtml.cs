@@ -25,6 +25,7 @@ namespace Web.Pages
                 ApproveCount = category.ApproveCount,
                 DisapproveCount = category.DisapproveCount,
                 ReceivedCount = category.ReceivedCount,
+                ExpiredCount = category.ExpiredCount,
             };
 
             return Page();

@@ -1,7 +1,9 @@
 ﻿@page
 @model Web.Pages.AllPendingModel
+
 @{
-    // Assume the model contains a list of pending donations named "pending"
+    Layout = "_Layout2";
+    var baseUrl = "https://localhost:7005";
 }
 
 <!DOCTYPE html>
@@ -40,14 +42,7 @@
                 border-radius: 5px;
             }
 
-            .donation-card img {
-                width: 100px;
-                height: 100px;
-                object-fit: cover;
-                border-radius: 50%;
-                margin-top: 15px;
-            }
-
+          
             .donation-card .card-body {
                 padding: 15px;
                 text-align: center;
@@ -65,17 +60,13 @@
                     .donation-card .details p strong {
                         color: #333;
                     }
-
-        .view-details-btn {
-            margin-top: 15px;
-        }
     </style>
 </head>
 
 <body>
     <div class="container mt-5">
         <h2 class="text-center mb-4">Pending Donations</h2>
-        @if (Model.pending == null || !Model.pending.Any())
+        @if (Model.pending.Data == null || !Model.pending.Data.Any())
         {
             <div class="alert alert-warning text-center">
                 No Donations at the moment.
@@ -84,16 +75,17 @@
         else
         {
             <div class="card-container">
-                @foreach (var donation in Model.pending)
+                @foreach (var donation in Model.pending.Data)
                 {
                     <div class="donation-card">
                         <div class="status">@donation.Status</div>
                         <div class="text-center">
-                            <img src="@donation.PrimaryImageUrl" alt="@donation.Name's Profile Image">
+                            <img src="@($"{baseUrl}{donation.PrimaryImageUrl}")" alt="@donation.Name's Profile Image">
                         </div>
                         <div class="card-body">
-                            <h5 class="card-title">Food Details: @donation.FoodDetails</h5>
+                            <h5 class="card-title">Details:</h5>
                             <div class="details">
+                                <p><strong>Food Details:</strong> @donation.FoodDetails</p>
                                 <p><strong>Expiration Date:</strong> @donation.ExpirationDate.ToShortDateString()</p>
                                 <p><strong>Pick-Up Location:</strong> @donation.PickUpLocation</p>
                                 <p><strong>Pick-Up Time:</strong> @donation.PickUpTime.ToString("hh:mm tt")</p>
@@ -105,15 +97,66 @@
                                 <p><strong>Phone Number:</strong> @donation.PhoneNumber</p>
                                 <p><strong>Donation Made By:</strong> @donation.DonationMadeBy</p>
                             </div>
-                            <a href="#" class="btn btn-primary view-details-btn">View Details</a>
+
+                            <div class="d-flex justify-content-between mt-3">
+                                <form method="post" asp-page-handler="Approve" asp-route-DonationId="@donation.DonationId">
+                                    <button type="submit" class="btn btn-success">Approve</button>
+                                </form>
+
+
+                                <!-- Button to open the Disapprove modal -->
+                                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#disapproveModal" data-donation-id="@donation.DonationId">
+                                    Disapprove
+                                </button>
+                            </div>
                         </div>
                     </div>
                 }
             </div>
         }
+
+        <!-- Disapprove Modal -->
+        <div class="modal fade" id="disapproveModal" tabindex="-1" aria-labelledby="disapproveModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="disapproveModalLabel">Disapprove Donation</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form method="post" asp-page-handler="Disapprove" id="disapproveForm">
+                            <!-- Hidden input for the Donation ID -->
+                            <input type="hidden" asp-for="DisapproveRequest.Id" id="disapproveDonationId" />
+
+                            <!-- Textarea for the disapproval reason -->
+                            <div class="mb-3">
+                                <label for="reason" class="form-label">Reason for Disapproval</label>
+                                <textarea class="form-control" asp-for="DisapproveRequest.ReasonForDisapproval" id="reason" rows="3" required></textarea>
+                            </div>
+
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                <button type="submit" class="btn btn-danger">Submit</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            var disapproveModal = document.getElementById('disapproveModal');
+            disapproveModal.addEventListener('show.bs.modal', function (event) {
+                var button = event.relatedTarget; // Button that triggered the modal
+                var donationId = button.getAttribute('data-donation-id'); // Extract donation ID
+
+                // Update the modal's hidden input with the donation ID
+                var donationIdInput = document.getElementById('disapproveDonationId');
+                donationIdInput.value = donationId;
+            });
+        </script>
     </div>
 
-    @* <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js"></script> *@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
 </body>
 

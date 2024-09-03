@@ -1,102 +1,203 @@
-﻿@* @page
+﻿@page
 @model Web.Pages.TrackDonationModel
+
+@using Gateway.Models.Donation
+@using System.Security.Claims
+@using System.IdentityModel.Tokens.Jwt
 @{
+    var baseUrl = "https://localhost:7005";
+    var token = HttpContext.Session.GetString("JWToken");
+    var handler = new JwtSecurityTokenHandler();
+    var jwtToken = handler.ReadToken(token) as JwtSecurityToken;
+
+    var id = jwtToken?.Claims.First(claim => claim.Type == "Id").Value;
+    Guid.TryParse(id, out Guid userId);
 }
-@using System.Security.Claims;
-
-
 @if (TempData["Message"] != null)
 {
-    <div class="alert alert-success">
+    <div class="alert alert-danger">
         @TempData["Message"]
     </div>
 }
-
-@{
-    Layout = "_Layout";
+@if (Model.viewPage.Donation.Status != DonationStatus.Claim)
+{
+    <h2 class="text-center mb-4">Donation Status Have Been Changed</h2>
 }
+else
+{
+    <div class="container mt-5">
+        <div class="row">
+            <!-- Donation Details -->
+            <div class="col-md-4">
+                <div class="card">
+                    <img src="@($"{baseUrl}{Model.viewPage.Donation.PrimaryImageUrl}")" class="card-img-top" alt="Donation Image">
+                    <div class="card-body">
+                        <h5 class="card-title">@Model.viewPage.Donation.FoodDetails</h5>
+                        <p class="card-text"><strong>Quantity:</strong> @Model.viewPage.Donation.Quantity</p>
+                        <p class="card-text"><strong>Expiration Date:</strong> @Model.viewPage.Donation.ExpirationDate.ToShortDateString()</p>
+                        <p class="card-text"><strong>Pick-Up Location:</strong> @Model.viewPage.Donation.PickUpLocation</p>
+                        <p class="card-text"><strong>Status:</strong> <span class="badge badge-info">@Model.viewPage.Donation.Status</span></p>
+                        <input type="hidden" id="jwtToken" value="@token" />
+                        <input type="hidden" id="userId" value="@userId" />
+                        <input type="hidden" id="recipient" value="@Model.viewPage.Donation.RecipientId" />
 
-<div class="container mt-5">
-    <div class="row">
-        <!-- Donation Details -->
-        <div class="col-md-4">
-            <div class="card">
-                <img src="@Model.Donation.PrimaryImageUrl" class="card-img-top" alt="Donation Image">
-                <div class="card-body">
-                    <h5 class="card-title">@Model.Donation.FoodDetails</h5>
-                    <p class="card-text"><strong>Quantity:</strong> @Model.Donation.Quantity</p>
-                    <p class="card-text"><strong>Expiration Date:</strong> @Model.Donation.ExpirationDate.ToShortDateString()</p>
-                    <p class="card-text"><strong>Pick-Up Location:</strong> @Model.Donation.PickUpLocation</p>
-                    <p class="card-text"><strong>Status:</strong> <span class="badge badge-info">@Model.Donation.Status</span></p>
 
-                    @if (Model.Donation.Status == Final_project_PresentationLayer.Models.DonationViewModel.DonationStatus.Claim)
-                    {
-                        <form method="post" asp-action="MarkDonationAsReceived" asp-route-donationId="@Model.Donation.DonationId">
-                            <button type="submit" class="btn btn-success">Mark as Received</button>
-                        </form>
-                    }
-                </div>
-            </div>
-        </div>
-
-        <!-- Chat Box -->
-        <div class="col-md-8">
-            <div class="chat-box card">
-                <div class="card-body">
-                    <h5>Chat with Recipient</h5>
-                    <div class="chat-messages">
-                        @foreach (var message in Model.Messages)
+                        @if (Model.viewPage.Donation.Status == DonationStatus.Claim && !Model.viewPage.IsDonor)
                         {
-                            var userId = Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
-                            var alignmentClass = message.DonorId == userId ? "text-right" : "text-left";
-
-                            <div class="message @alignmentClass">
-                                <div class="message-content">
-                                    <p>@message.Content</p>
-                                    <small>@message.SentAt.ToString("g")</small>
+                            <form method="post" asp-page-handler="MarkDonationAsReceived">
+                                <input type="hidden" asp-for="receive.DonationId" value="@Model.viewPage.Donation.DonationId" />
+                                <div class="form-group mt-3">
+                                    <label for="reason">Please leave a comment about the donation received:</label>
+                                    <textarea class="form-control" id="reason" asp-for="receive.Review" required></textarea>
                                 </div>
-                            </div>
+                                <button type="submit" class="btn btn-success">Mark as Received</button>
+                            </form>
                         }
 
+                        <!-- Form to Mark as Available -->
+                        @if (Model.viewPage.IsDonor)
+                        {
+                            <form method="post" asp-page-handler="MarkDonationAsAvailabled">
+                                <input type="hidden" asp-for="available.DonationId" value="@Model.viewPage.Donation.DonationId" />
+                                <div class="form-group mt-3">
+                                    <label for="reason">Reason for making available again:</label>
+                                    <textarea class="form-control" id="reason" asp-for="available.reason" required></textarea>
+                                </div>
+                                <button type="submit" class="btn btn-warning mt-3">Make Available</button>
+                            </form>
+                        }
+                    </div>
+                </div>
+            </div>
+
+            <!-- Chat Box -->
+            <div class="col-md-8">
+                <div class="chat-box card">
+                    <div class="card-body">
+                        @if (Model.viewPage.IsDonor)
+                        {
+                            <h5>Chat with Donor</h5>
+                        }
+                        else
+                        {
+                            <h5>Chat with Recipient</h5>
+                        }
+
+                        <div class="chat-messages" id="chatMessages">
+                            @if (Model.viewPage.Messages != null && Model.viewPage.Messages.Any())
+                            {
+                                                                
+                                foreach (var message in Model.viewPage.Messages)
+                                {
+                                    string alignmentClass = string.Empty;
+                                    @if( message.UserId == userId )
+                                    {
+                                        alignmentClass = "sender";
+                                    }
+                                    else{
+                                        alignmentClass = "receiver";
+                                    }
+
+                                    <div class="message @alignmentClass">
+                                        <div class="message-content">
+                                            <p>@message.Content</p>
+                                            <small>@message.SentAt.ToString("g")</small>
+                                        </div>
+                                    </div>
+                                }
+                            }
+                            else
+                            {
+                                <p>No messages yet. Start the conversation!</p>
+                            }
+                        </div>
+
+                        <input type="hidden" id="donationId" value="@Model.viewPage.Donation.DonationId" />
+
+                        <div class="form-group">
+                            <textarea class="form-control" id="messageContent" placeholder="Type your message..." required></textarea>
+                        </div>
+                        <button type="button" id="sendMessageButton" class="btn btn-primary">Send</button>
 
                     </div>
-                    <form asp-action="SendMessage" method="post" class="mt-4">
-                        <input type="hidden" name="RecipientId" value="@Model.Donation.RecipientId" />
-                        <input type="hidden" name="DonationId" value="@Model.Donation.DonationId" />
-                        <div class="form-group">
-                            <textarea class="form-control" name="Content" placeholder="Type your message..." required></textarea>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Send</button>
-                    </form>
                 </div>
             </div>
         </div>
     </div>
-</div>
 
-<style>
-    .chat-box {
-        height: 500px;
-        overflow-y: auto;
-    }
-    .chat-messages {
-        max-height: 350px;
-        overflow-y: auto;
-    }
-    .message {
-        margin-bottom: 15px;
-    }
-    .message-content {
-        display: inline-block;
-        background-color: #007bff;
-        color: white;
-        padding: 10px 15px;
-        border-radius: 20px;
-        max-width: 75%;
-    }
-    .text-right .message-content {
-        background-color: #17a2b8;
-    }
-</style>
 
- *@
+    <style>
+        .message {
+            display: flex;
+            margin-bottom: 10px;
+        }
+
+        /* Receiver (left-aligned) */
+        .receiver {
+            justify-content: flex-start;
+            text-align: left;
+            background-color: #f1f1f1; /* Light grey for received messages */
+            margin-right: auto;
+            margin-left: 10px;
+            border-radius: 10px 10px 10px 0; /* Rounded corners */
+        }
+
+        /* Sender (right-aligned) */
+        .sender {
+            justify-content: flex-end;
+            text-align: right;
+            background-color: #dcf8c6; /* Light green for sent messages */
+            margin-left: auto;
+            margin-right: 10px;
+            border-radius: 10px 10px 0 10px; /* Rounded corners */
+        }
+
+        .message-content {
+            padding: 10px;
+            max-width: 60%; /* Limit width to avoid very wide messages */
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        }
+
+
+
+
+
+        /*  .text-left {
+                                    text-align: left;
+                                    margin-right: auto;
+                                    background-color: #f1f1f1;
+                                }
+
+                                .message-content {
+                                    display: inline-block;
+                                    padding: 10px;
+                                    border-radius: 10px;
+                                    background-color: #fff;
+                                    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+                                }
+
+                                .sender {
+                                    justify-content: flex-end;
+                                    background-color: #dcf8c6;
+                                    align-self: flex-end;
+                                }
+
+                                .receiver {
+                                    justify-content: flex-start;
+                                    background-color: #ffffff;
+                                    align-self: flex-start;
+                                } */
+
+    </style>
+
+
+
+
+
+    <script src="~/js/signalr/dist/browser/signalr.js"></script>
+    <script src="~/js/chat.js"></script>
+}
+
+
+
+

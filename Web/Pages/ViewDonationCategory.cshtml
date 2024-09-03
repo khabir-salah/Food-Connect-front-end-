@@ -78,7 +78,7 @@
 <body>
 
     <div class="container donation-container">
-        <h2 class="text-center mb-4">Your Donations</h2>
+        <h2 class="text-center mb-4">Your Food Donations</h2>
         <div class="row">
 
             <!-- Pending Donations -->
@@ -86,7 +86,7 @@
                 <div class="card donation-card">
                     <div class="donation-header">Pending Donations</div>
                     <div class="card-body donation-body">
-                        <span class="donation-type"><i class="fas fa-hourglass-half"></i><a asp-page="PendingDonations" >Pending</a></span>
+                        <span class="donation-type"><i class="fas fa-hourglass-half"></i><a asp-page="/PendingDonations" >Pending</a></span>
                         <span class="badge badge-notification">@Model.model.PendingCount</span>
                     </div>
                 </div>
@@ -97,7 +97,7 @@
                 <div class="card donation-card">
                     <div class="donation-header">Approved Donations</div>
                     <div class="card-body donation-body">
-                        <span class="donation-type"><i class="fas fa-check-circle"></i><a asp-action="ApprovedDonations" asp-controller="Donation">Approved Donations</a></span>
+                        <span class="donation-type"><i class="fas fa-check-circle"></i><a asp-page="/ApprovedDonations" >Approved Donations</a></span>
                         <span class="badge badge-notification">@Model.model.ApproveCount</span>
                     </div>
                 </div>
@@ -108,7 +108,7 @@
                 <div class="card donation-card">
                     <div class="donation-header">Disapproved Donations</div>
                     <div class="card-body donation-body">
-                        <span class="donation-type"><i class="fas fa-times-circle"></i><a asp-action="DisapprovedDonations" asp-controller="Donation">Disapproved Donations</a></span>
+                        <span class="donation-type"><i class="fas fa-times-circle"></i><a asp-page="/DispprovedDonations" >Disapproved Donations</a></span>
                         <span class="badge badge-notification">@Model.model.DisapproveCount</span>
                     </div>
                 </div>
@@ -119,8 +119,18 @@
                 <div class="card donation-card">
                     <div class="donation-header">Received Donations</div>
                     <div class="card-body donation-body">
-                        <span class="donation-type"><i class="fas fa-gift"></i><a asp-action="ReceivedDonations" asp-controller="Donation">Received Donations</a></span>
+                        <span class="donation-type"><i class="fas fa-gift"></i><a asp-page="/ReceivedDonations">Received Donations</a></span>
                         <span class="badge badge-notification">@Model.model.ReceivedCount</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="card donation-card">
+                    <div class="donation-header">Expired Donations</div>
+                    <div class="card-body donation-body">
+                        <span class="donation-type"><i class="fas fa-gift"></i><a asp-page="/UserExpiredDonation">Expired Donations</a></span>
+                        <span class="badge badge-notification">@Model.model.ExpiredCount</span>
                     </div>
                 </div>
             </div>

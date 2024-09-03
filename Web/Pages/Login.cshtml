@@ -1,4 +1,4 @@
-﻿@page "/login"
+﻿@page "/Login"
 @model Web.Pages.LoginModel
 
 @{
@@ -7,7 +7,7 @@
 
 @if (TempData["Message"] != null)
 {
-    <div class="alert alert-success" style="color: red">
+    <div class="alert alert-danger">
         @TempData["Message"]
     </div>
 }
@@ -87,7 +87,7 @@
                                 Remember me
                             </label>
                         </div>
-                        <a href="#!" class="text-body">Forgot password?</a>
+                        <a asp-page="/ForgotPassword" class="text-body">Forgot password?</a>
                     </div>
 
                     <div class="text-center text-lg-start mt-4 pt-2">
@@ -96,7 +96,7 @@
                             Login
                         </button>
                         <p class="small fw-bold mt-2 pt-1 mb-0">
-                            Don't have an account? <a asp-controller="Home" asp-action="Index"
+                            Don't have an account? <a asp-page="/Index"
                                                       class="link-danger">Register</a>
                         </p>
                     </div>

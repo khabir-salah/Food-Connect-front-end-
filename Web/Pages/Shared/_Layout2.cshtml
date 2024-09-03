@@ -1,4 +1,13 @@
-﻿<!DOCTYPE html>
+﻿@using Gateway.Models.Donation
+@{
+    var pendingCount = TempData["PendingCount"] as int?;
+    var approveCount = TempData["ApproveCount"] as int?;
+    var disapproveCount = TempData["DisapproveCount"] as int?;
+    var receivedCount = TempData["ReceivedCount"] as int?;
+    var claimedCount = TempData["ClaimedCount"] as int?;
+    var expiredCount = TempData["ExpiredCount"] as int?;
+}
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -32,7 +41,7 @@
         .dropdown-content {
             display: none;
             position: absolute;
-            background-color: palegreen;
+            background-color: midnightblue;
             min-width: 200px;
             box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
             z-index: 1;
@@ -46,7 +55,7 @@
             }
 
                 .dropdown-content a:hover {
-                    background-color: rosybrown;
+                    background-color: midnightblue;
                 }
 
         .dropdown:hover .dropdown-content {
@@ -67,6 +76,11 @@
         .menu-icon {
             margin-right: 8px;
         }
+        h2{
+            color: white;
+            /* background-color: white; */
+        }
+
     </style>
 
 </head>
@@ -74,12 +88,12 @@
     <section id="menu">
         <div class="logo">
             <img src="~/Template/images/bk.jpeg" alt="">
-            <h2>Food Connect</h2>
+            <h2>Food Connect </h2>
         </div>
 
         <div class="items">
             <li>
-                <a asp-action="" asp-controller="">
+                <a asp-Page="AdminDashBoard" >
                     <i class="fa fa-dashboard fas menu-icon"></i> DashBoard
                 </a>
             </li>
@@ -93,76 +107,62 @@
             <li class="dropdown">
                 <a asp-action="" asp-controller="" class="menu-item">
                     <i class="fa fa-group fas menu-icon"></i> View Donations
-                    <span class="badge-notification">2</span>
                 </a>
                 <div class="dropdown-content">
                     <a asp-page="/AllPending" asp-route-status="1">
                         <i class="fa fa-clock-o menu-icon"></i> Pending
-                        <span class="badge-notification">5</span>
+                        <span class="badge-notification">@pendingCount</span>
                     </a>
-                    <a asp-page="/AllDonations" asp-route-status="2">
+
+                    <a asp-page="/AllApproved" asp-route-status="2">
                         <i class="fa fa-check-circle menu-icon"></i> Approved
-                        <span class="badge-notification">7</span>
+                        <span class="badge-notification">@approveCount</span>
                     </a>
-                    <a asp-page="/AllDonations" asp-route-status="3">
+                    <a asp-page="/AllDisapproved" asp-route-status="3">
                         <i class="fa fa-times-circle menu-icon"></i> Disapproved
-                        <span class="badge-notification">7</span>
+                        <i class="badge-notification">@disapproveCount</i>
                     </a>
-                    <a asp-page="/AllDonations" asp-route-status="4">
+                    <a asp-page="/AllReceived" asp-route-status="4">
                         <i class="fa fa-truck menu-icon"></i> Received
-                        <span class="badge-notification">7</span>
+                        <span class="badge-notification">@receivedCount</span>
                     </a>
-                    <a asp-page="/AllDonations" asp-route-status="5">
+                    <a asp-page="/AllClaimed" asp-route-status="5">
                         <i class="fa fa-flag menu-icon"></i> Claim
-                        <span class="badge-notification">9</span>
+                        <span class="badge-notification">@claimedCount</span>
                     </a>
-                    <a asp-page="/AllDonations" asp-route-status="6">
-                        <i class="fa fa-box-open menu-icon"></i> Available
-                        <span class="badge-notification">7</span>
+                    <a asp-page="/AllAvailable" asp-route-status="6">
+                        <i class="fa fa-box-open menu-icon"></i> Expired
+                        <span class="badge-notification">@expiredCount</span>
                     </a>
                 </div>
+
 
             </li>
 
             <!-- View All Users Dropdown -->
-            <li class="dropdown">
-                <a asp-action="" asp-controller="" class="menu-item">
-                    <i class="fa fa-users fas menu-icon"></i> View All Users
-                    <span class="badge-notification">2</span>
+            <li>
+                <a asp-Page="/ViewAllUser" >
+                    <i class="fa fa-envelope fas menu-icon"></i> View All Users
                 </a>
-                <div class="dropdown-content">
-                    <a asp-action="" asp-controller="">
-                        <i class="fa fa-user-tie menu-icon"></i> Managers
-                        <span class="badge-notification">3</span>
-                    </a>
-                    <a asp-action="" asp-controller="">
-                        <i class="fa fa-home menu-icon"></i> Family
-                        <span class="badge-notification">3</span>
-                    </a>
-                    <a asp-action="" asp-controller="">
-                        <i class="fa fa-building menu-icon"></i> Organization
-                        <span class="badge-notification">4</span>
-                    </a>
-                    <a asp-action="" asp-controller="">
-                        <i class="fa fa-user menu-icon"></i> Individual
-                        <span class="badge-notification">6</span>
-                    </a>
-                </div>
             </li>
 
             <li>
-                <a asp-action="" asp-controller="">
-                    <i class="fa fa-envelope fas menu-icon"></i> Message Manager
+                <a asp-page="/AllInappropriateReview">
+                    <i class="fa fa-envelope fas menu-icon"></i> Reviews
                 </a>
             </li>
-            <li>
-                <a asp-action="" asp-controller="">
+           @*  <li>
+                <a asp-action="" >
                     <i class="fa fa-bell fas menu-icon"></i> Notification
                 </a>
+            </li> *@
+            <li class="nav-item">
+                <a class="nav-link search-icon" asp-page="/AllSearch">
+                    <i class="fas fa-search">Search Donation</i>
+                </a>
             </li>
-
             <li class="signout">
-                <a asp-action="LogOut" asp-controller="Identity">
+                <a asp-page="Logout" >
                     <i class="fa fa-sign-out"></i> Sign Out
                 </a>
             </li>

@@ -1,13 +1,8 @@
-﻿@page "/UserDashBoard"
-
+﻿@page
+@model Web.Pages.UserDashboardModel
 @{
     Layout = "_Layout";
-}
-@if (TempData["Message"] != null)
-{
-    <div class="alert alert-success">
-        @TempData["Message"]
-    </div>
+    var totalCount = TempData["TotalCount"]  as int?;
 }
 
 <!DOCTYPE html>
@@ -48,7 +43,7 @@
 <body>
 
     <!-- Add your sticky navbar here if not already included -->
-
+    @* @(Model.model.PendingCount + Model.model.ApproveCount + Model.model.DisapproveCount + Model.model.ReceivedCount + Model.model.ClaimedCount + Model.model.ExpiredCount) *@
     <section class="ftco-counter ftco-intro" id="section-counter">
         <div class="container">
             <div class="row no-gutters">
@@ -56,7 +51,10 @@
                     <div class="block-18 color-1 align-items-stretch">
                         <div class="text">
                             <span>Served Over</span>
-                            <strong class="number" data-number="14328">0</strong>
+                            <strong class="number" data-number=39>
+                                0
+                            </strong>
+
                             <span>Children in 190 countries in the world</span>
                         </div>
                     </div>
@@ -66,7 +64,7 @@
                         <div class="text">
                             <h3 class="mb-4">Donate Money</h3>
                             <p>Even the all-powerful Pointing has no control about the blind texts.</p>
-                            <p><a href="#" class="btn btn-white px-3 py-2 mt-2">Donate Now</a></p>
+                            <p><a asp-page="/CreateDonation" class="btn btn-white px-3 py-2 mt-2">Donate Now</a></p>
                         </div>
                     </div>
                 </div>
@@ -75,7 +73,8 @@
                         <div class="text">
                             <h3 class="mb-4">Be a Volunteer</h3>
                             <p>Even the all-powerful Pointing has no control about the blind texts.</p>
-                            <p><a href="#" class="btn btn-white px-3 py-2 mt-2">Be A Volunteer</a></p>
+                            <p><a href="#volunteerSection" class="btn btn-white px-3 py-2 mt-2">Be A Volunteer</a></p>
+
                         </div>
                     </div>
                 </div>
@@ -86,7 +85,7 @@
     <!-- Other content here -->
 
 </body>
-</html>
+
 
 
 <section class="ftco-section">
@@ -96,7 +95,7 @@
                 <div class="media block-6 d-flex services p-3 py-4 d-block">
                     <div class="icon d-flex mb-3"><span class="flaticon-donation-1"></span></div>
                     <div class="media-body pl-4">
-                        <h3 class="heading">Make Donation</h3>
+                        <h3 class="heading"><a asp-page="/CreateDonation">Make Donation</a></h3>
                         <p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic.</p>
                     </div>
                 </div>
@@ -105,7 +104,7 @@
                 <div class="media block-6 d-flex services p-3 py-4 d-block">
                     <div class="icon d-flex mb-3"><span class="flaticon-charity"></span></div>
                     <div class="media-body pl-4">
-                        <h3 class="heading">Become A Volunteer</h3>
+                        <h3 class="heading"><a href="#volunteerForm">Become A Volunteer</a></h3>
                         <p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic.</p>
                     </div>
                 </div>
@@ -131,16 +130,16 @@
 
 
 
-<section class="ftco-section-3 img" style="background-image: url(images/bg_3.jpg);">
+<section id="volunteerSection" class="ftco-section-3 img">
     <div class="overlay"></div>
     <div class="container">
         <div class="row d-md-flex">
             <div class="col-md-6 d-flex ftco-animate">
-                <div class="img img-2 align-self-stretch" style="background-image: url(images/bg_4.jpg);"></div>
+                <!-- Add your image or content here -->
             </div>
             <div class="col-md-6 volunteer pl-md-5 ftco-animate">
                 <h3 class="mb-3">Be a volunteer</h3>
-                <form action="#" class="volunter-form">
+                <form action="#" id="volunteerForm" class="volunter-form">
                     <div class="form-group">
                         <input type="text" class="form-control" placeholder="Your Name">
                     </div>
@@ -158,7 +157,6 @@
         </div>
     </div>
 </section>
-
-
+</html>
 
 

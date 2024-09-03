@@ -15,5 +15,6 @@ namespace Gateway.Managers.Organisation
         Task<bool> RegisterFamily(CreateFamilyViewModel viewModel);
         Task<bool> RegisterManager(CreateManagerViewModel viewModel);
         Task<LoginResponse> Login(LoginViewModel viewModel);
+        Task<bool> ForgetPassword(string email);
     }
 }

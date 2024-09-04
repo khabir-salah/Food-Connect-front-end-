@@ -1,0 +1,123 @@
+﻿@page
+@model Web.Pages.AllApprovedModel
+@{
+}
+@{
+    Layout = "_Layout2";
+    var baseUrl = "https://localhost:7005";
+}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Approved Donations</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .card-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .donation-card {
+            width: 300px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+            .donation-card .status {
+                position: absolute;
+                top: 10px;
+                right: 10px;
+                background-color: green;
+                color: black;
+                padding: 5px 10px;
+                font-weight: bold;
+                border-radius: 5px;
+            }
+
+           
+
+            .donation-card .card-body {
+                padding: 15px;
+                text-align: center;
+            }
+
+            .donation-card .details {
+                margin-top: 10px;
+                text-align: left;
+            }
+
+                .donation-card .details p {
+                    margin: 5px 0;
+                }
+
+                    .donation-card .details p strong {
+                        color: #333;
+                    }
+
+        .view-details-btn {
+            margin-top: 15px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container mt-5">
+        <h2 class="text-center mb-4">Pending Donations</h2>
+        @if (Model.Approved.Data == null || !Model.Approved.Data.Any())
+        {
+            <div class="alert alert-warning text-center">
+                No Donations at the moment.
+            </div>
+        }
+        else
+        {
+            <div class="card-container">
+                @foreach (var donation in Model.Approved.Data)
+                {
+                    <div class="donation-card">
+                        <div class="status">@donation.Status</div>
+                        <div class="text-center">
+                            <img src="@($"{baseUrl}{donation.PrimaryImageUrl}")" alt="@donation.Name's Profile Image">
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">Details:</h5>
+                            <div class="details">
+                                <p><strong>Food Details:</strong> @donation.FoodDetails</p>
+                                <p><strong>Expiration Date:</strong> @donation.ExpirationDate.ToShortDateString()</p>
+                                <p><strong>Pick-Up Location:</strong> @donation.PickUpLocation</p>
+                                <p><strong>Pick-Up Time:</strong> @donation.PickUpTime.ToString("hh:mm tt")</p>
+                                <p><strong>Quantity:</strong> @donation.Quantity</p>
+                                <p><strong>User Email:</strong> @donation.UserEmail</p>
+                                <p><strong>User Role:</strong> @donation.UserRole</p>
+                                <p><strong>Address:</strong> @donation.Address</p>
+                                <p><strong>Name:</strong> @donation.Name</p>
+                                <p><strong>Phone Number:</strong> @donation.PhoneNumber</p>
+                                <p><strong>Donation Made By:</strong> @donation.DonationMadeBy</p>
+
+                                <!-- Manager Information -->
+                                <p><strong>Manager Name:</strong> @donation.ManagerName</p>
+                                <p><strong>Manager Email:</strong> @donation.ManagerEmail</p>
+                            </div>
+
+                            <!-- Add any additional buttons or actions here -->
+                        </div>
+                    </div>
+                }
+
+            </div>
+        }
+    </div>
+
+    @* <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js"></script> *@
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+</body>
+
+</html>

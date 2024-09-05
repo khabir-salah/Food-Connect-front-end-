@@ -1,0 +1,19 @@
+﻿@page
+@model Web.Pages.Shared.SuccessApproveModel
+@{
+    Layout = "_Layout2";
+}
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+
+<div class="container mt-5 text-center">
+    <!-- Success Icon -->
+    <i class="fas fa-check-circle text-success" style="font-size: 100px;"></i>
+
+    <!-- Success Message -->
+    <h1 class="display-4 text-success">Food Donation Approved Successfully!</h1>
+
+
+    <!-- Back to Home or Other Action -->
+    @* <a href="@Url.Action("/UserDashboard")" class="btn btn-primary mt-3">Go to Homepage</a> *@
+    <a asp-page="/AllPending" class="btn btn-primary mt-3">Back To Page</a>
+</div>

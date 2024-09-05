@@ -1,0 +1,21 @@
+﻿@page
+@model Web.Pages.SuccessReceivedModel
+@{
+}
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+
+<div class="container mt-5 text-center">
+    <!-- Success Icon -->
+    <i class="fas fa-check-circle text-success" style="font-size: 100px;"></i>
+
+    <!-- Success Message -->
+    <h1 class="display-4 text-success">Thank You!.</h1>
+    <p class="lead">We Hope You Enjoyed it. Looking Forward To Your Donation Soon</p>
+
+    <!-- Additional Info -->
+    <p>Saving people from hunger and making the world a better place.</p>
+
+    <!-- Back to Home or Other Action -->
+    @* <a href="@Url.Action("/UserDashboard")" class="btn btn-primary mt-3">Go to Homepage</a> *@
+    <a asp-page="/UserDashboard" class="btn btn-primary mt-3">Go to Homepage</a>
+</div>

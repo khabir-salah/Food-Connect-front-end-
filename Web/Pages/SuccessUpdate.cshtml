@@ -1,0 +1,21 @@
+﻿@page
+@model Web.Pages.SuccessUpdateModel
+@{
+}
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+
+<div class="container mt-5 text-center">
+    <!-- Success Icon -->
+    <i class="fas fa-check-circle text-success" style="font-size: 100px;"></i>
+
+    <!-- Success Message -->
+    <h1 class="display-4 text-success">Profile Update was Successfull!</h1>
+    <p>You Stand more Chance of Claiming Food Donation.</p>
+
+
+    <!-- Back to Home or Other Action -->
+    @* <a href="@Url.Action("/UserDashboard")" class="btn btn-primary mt-3">Go to Homepage</a> *@
+    <a asp-page="/ReceiveFoodDonation" class="btn btn-primary mt-3">Claim Donation Now</a>
+    <a asp-page="/ViewProfile" class="btn btn-primary mt-3">View Profile</a>
+
+</div>

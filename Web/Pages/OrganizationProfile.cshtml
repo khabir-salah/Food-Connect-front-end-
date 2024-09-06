@@ -1,0 +1,243 @@
+﻿@page
+@model Web.Pages.OrganizationUpdateModel
+@{
+    if (TempData["Message"] != null)
+    {
+        <div class="alert alert-danger" style="color: red">
+            @TempData["Message"]
+        </div>
+    }
+    var baseUrl = "https://localhost:7005";
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Organization Profile</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- FontAwesome for icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: 'Arial', sans-serif;
+        }
+
+        .profile-container {
+            margin-top: 50px;
+        }
+
+        .profile-section {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .profile-header {
+            margin-bottom: 30px;
+            text-align: center;
+            color: #007bff;
+        }
+
+        .profile-details, .profile-edit {
+            padding: 20px;
+        }
+
+        .profile-details h5, .profile-edit h5 {
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        .profile-details .detail-item {
+            margin-bottom: 15px;
+        }
+
+        .profile-edit .form-group {
+            margin-bottom: 20px;
+        }
+
+        .profile-edit .form-control {
+            background-color: #e9ecef;
+        }
+
+        .save-btn, .edit-btn {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+            display: none; /* Initially hidden */
+        }
+
+        .save-btn:hover, .edit-btn:hover {
+            background-color: #0056b3;
+        }
+
+        .edit-btn {
+            display: inline-block; /* Edit button is visible initially */
+        }
+
+        .form-control[readonly], .form-control[disabled], .form-control-file[disabled] {
+            background-color: #e9ecef;
+        }
+
+        .img-preview {
+            border-radius: 5px;
+            margin-top: 10px;
+            max-width: 100%;
+            height: auto;
+        }
+
+        media (max-width: 768px) {
+            .profile-container {
+                margin-top: 30px;
+            }
+
+            .profile-section {
+                flex-direction: column;
+            }
+
+            .profile-details, .profile-edit {
+                width: 100%;
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container profile-container">
+        <div class="row profile-section">
+            <!-- Non-editable Fields -->
+            <div class="col-md-5 profile-details">
+                <h4 class="profile-header">Organization Details</h4>
+                @*< div class="text-center">
+                    <img src="@($"{baseUrl}{Model.Organization.ProfileImage}")" alt="Profile Image">
+                </div> *@
+                <div class="detail-item">
+                    <h5>Organization Name</h5>
+                    <p>@Model.Organization.Name</p>
+                </div>
+                <div class="detail-item">
+                    <h5>Phone Number</h5>
+                    <p>@Model.Organization.PhoneNumber</p>
+                </div>
+                <div class="detail-item">
+                    <h5>CAC Number</h5>
+                    <p>@Model.Organization.CacNumber</p>
+                </div>
+                <div class="detail-item">
+                    <h5>Capacity</h5>
+                    <p>@Model.Organization.NumberOfPeopleInOrganization</p>
+                </div>
+                <div class="detail-item">
+                    <h5>Email</h5>
+                    <p>@Model.Organization.Email</p>
+                </div>
+                <div class="detail-item">
+                    <h5>Password</h5>
+                    <p>********</p>
+                </div>
+            </div>
+
+            <!-- Editable Fields -->
+            <div class="col-md-7 profile-edit">
+                <h4 class="profile-header">Edit Organization Profile</h4>
+                <form id="organizationForm" method="post" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <label for="city">City</label>
+                        <input type="text" class="form-control" id="city" name="city" value="@Model.Organization.City" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="localGovernment">Local Government</label>
+                        <input type="text" class="form-control" id="localGovernment" name="localGovernment" value="@Model.Organization.LOcalGovernment" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="postalCode">Postal Code</label>
+                        <input type="text" class="form-control" id="postalCode" name="postalCode" value="@Model.Organization.PostalCode" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="numberOfPeople">Number of People in Organization</label>
+                        <input type="number" class="form-control" id="numberOfPeople" name="numberOfPeople" value="@Model.Organization.NumberOfPeopleInOrganization" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="profileImage">Profile Image</label>
+                        <input type="file" class="img-preview" class="form-control-file" id="profileImage" accept="image/*" style="display:none" value="@Model.Organization.ProfileImage" name="profileImage" disabled>
+                    </div>
+                    <div class="form-group">
+                        <label for="phoneNumber">Phone Number</label>
+                        <input type="text" class="form-control" id="phoneNumber" name="phoneNumber" value="@Model.Organization.PhoneNumber" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="address">Address</label>
+                        <textarea class="form-control" id="address" name="address" rows="3" readonly>@Model.Organization.Address</textarea>
+                    </div>
+                    <button type="button" class="edit-btn" onclick="enableEditing()">Edit</button>
+                    <button type="submit" class="save-btn" onclick="saveChanges()">Save Changes</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    @* <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script> *@
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+        function enableEditing() {
+            // Enable all input fields for editing
+            document.getElementById("city").removeAttribute("readonly");
+            document.getElementById("localGovernment").removeAttribute("readonly");
+            document.getElementById("postalCode").removeAttribute("readonly");
+            document.getElementById("numberOfPeople").removeAttribute("readonly");
+            document.getElementById("phoneNumber").removeAttribute("readonly");
+            document.getElementById("address").removeAttribute("readonly");
+            document.getElementById("profileImage").removeAttribute("disabled");
+
+            // Hide the Edit button and show the Save button
+            document.querySelector(".edit-btn").style.display = "none";
+            document.querySelector(".save-btn").style.display = "inline-block";
+        }
+
+        function saveChanges() {
+            // Here you would typically send the data to the backend using AJAX or a form submission
+            // const UpdateModel = {
+            //     City: document.getElementById('city').value,
+            //     LocalGovernment: document.getElementById('localGovernment').value,
+            //     PostalCode: document.getElementById('postalCode').value,
+            //     NumberOfPeople: document.getElementById('numberOfPeople').value,
+            //     ProfileImage: document.getElementById('profileImage').files[0], // For file input
+            //     PhoneNumber: document.getElementById('phoneNumber').value,
+            //     Address: document.getElementById('address').value
+            // };
+
+            // fetch('/OrganizationProfile', {
+            //     method: 'POST',
+            //     body: JSON.stringify(UpdateModel),
+            // })
+
+
+            // After saving, disable editing again
+            document.getElementById("city").setAttribute("readonly", true);
+            document.getElementById("localGovernment").setAttribute("readonly", true);
+            document.getElementById("postalCode").setAttribute("readonly", true);
+            document.getElementById("numberOfPeople").setAttribute("readonly", true);
+            document.getElementById("phoneNumber").setAttribute("readonly", true);
+            document.getElementById("address").setAttribute("readonly", true);
+            document.getElementById("profileImage").setAttribute("disabled", true);
+
+            // Hide the Save button and show the Edit button
+            document.querySelector(".save-btn").style.display = "none";
+            document.querySelector(".edit-btn").style.display = "inline-block";
+
+            // alert("Changes saved successfully!");
+        }
+    </script>
+</body>
+</html>

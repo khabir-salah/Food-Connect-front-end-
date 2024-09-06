@@ -1,0 +1,293 @@
+﻿@page
+@model Web.Pages.FamilyHeadProfileModel
+@{
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Family Head Profile</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- FontAwesome for icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: 'Arial', sans-serif;
+        }
+        .profile-container {
+            margin-top: 50px;
+        }
+        .profile-section {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+        }
+        .profile-header {
+            margin-bottom: 30px;
+            text-align: center;
+            color: #007bff;
+        }
+        .profile-details h5 {
+            margin-bottom: 10px;
+            color: #333;
+            font-weight: bold;
+        }
+        .profile-details p {
+            margin-bottom: 20px;
+            color: #555;
+        }
+
+        .profile h5 {
+            margin-bottom: 10px;
+            color: #333;
+            font-weight: bold;
+        }
+
+        .profile p {
+            margin-bottom: 20px;
+            color: #555;
+        }
+        .card {
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+        .card-header {
+            background-color: #007bff;
+            color: #fff;
+            border-bottom: none;
+            border-radius: 10px 10px 0 0;
+            font-weight: bold;
+        }
+        .card-body {
+            padding: 20px;
+        }
+        .card-body p {
+            margin-bottom: 15px;
+        }
+        .img-fluid {
+            border-radius: 50%;
+        }
+        .family-member {
+            border-bottom: 1px solid #e9ecef;
+            padding: 10px 0;
+        }
+        .family-member:last-child {
+            border-bottom: none;
+        }
+        .family-member h5 {
+            margin: 0;
+            color: #333;
+        }
+        .family-member p {
+            margin: 0;
+            color: #555;
+        }
+        .save-btn, .edit-btn, .add-family-btn {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+        .save-btn:hover, .edit-btn:hover, .add-family-btn:hover {
+            background-color: #0056b3;
+        }
+        .save-btn {
+            display: none;
+        }
+        .form-control[readonly], .form-control[disabled], .form-control-file[disabled] {
+            background-color: #e9ecef;
+        }
+        .add-family-member-form {
+            display: none;
+            margin-top: 20px;
+            padding: 20px;
+            border: 1px solid #dee2e6;
+            border-radius: 10px;
+            background-color: #f8f9fa;
+        }
+        media (max-width: 768px) {
+            .profile-container {
+                margin-top: 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="container profile-container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="profile-section">
+                <h2 class="profile-header">Family Head Profile</h2>
+                <div class="row">
+                    <!-- UnEditable Family Head Details -->
+                    <div class="col-md-4">
+                        <div class="card">
+                            <div class="card-header">
+                                Family Head Details
+                            </div>
+                            <div class="card-body text-center">
+                                <img src="@Model.model.ProfileImage ?? "https://via.placeholder.com/150"" alt="Profile Image" class="img-fluid mb-3" />
+                                <div class="profile">
+                                    <h5>Name</h5>
+                                    <p>@Model.model.Name</p>
+                                </div>
+                                <div class="profile">
+                                    <h5>Email</h5>
+                                    <p>@Model.model.Email</p>
+                                </div>
+                                <div class="profile">
+                                    <h5>Phone Number</h5>
+                                    <p>@Model.model.PhoneNumber</p>
+                                </div>
+                                <div class="profile">
+                                    <h5>NIN</h5>
+                                    <p>@Model.model.Nin</p>
+                                </div>
+                                <div class="profile">
+                                    <h5>Password</h5>
+                                    <p>********</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Editable Details -->
+                    <div class="col-md-8">
+                        <form method="post">
+                            <div class="form-group">
+                                <label for="city">City</label>
+                                <input type="text" class="form-control" id="city" name="city" value="@Model.model.City" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label for="localGovernment">Local Government</label>
+                                <input type="text" class="form-control" id="localGovernment" name="localGovernment" value="@Model.model.LOcalGovernment" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label for="postalCode">Postal Code</label>
+                                <input type="text" class="form-control" id="postalCode" name="postalCode" value="@Model.model.PostalCode" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label for="address">Address</label>
+                                <textarea class="form-control" id="address" name="address" rows="3" readonly>@Model.model.Address</textarea>
+                            </div>
+                            <button type="button" class="edit-btn" onclick="enableEditing()">Edit</button>
+                            <button type="submit" class="save-btn">Save Changes</button>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Family Members Section -->
+                <div class="family-members-section">
+                    <h3 class="text-center mb-4">Family Members</h3>
+                    @if (Model.model.Families != null && Model.model.Families.Any())
+                    {
+                        <div class="row">
+                            <div class="col-md-12">
+                                @foreach (var member in Model.model.Families)
+                                {
+                                    <div class="family-member">
+                                        <h5>@member.FirstName @member.LastName</h5>
+                                        <p>NIN: @member.Nin</p>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    }
+                    else
+                    {
+                        <p class="text-center">No family members added yet.</p>
+                    }
+                    <button type="button" class="add-family-btn" onclick="showFamilyForm()">Add Family Member</button>
+                </div>
+
+                <!-- Add Family Member Form -->
+                <form method="post">
+                    <div class="add-family-member-form" id="familyMemberForm">
+                        <h4>Add Family Member</h4>
+                        <div class="form-group">
+                            <label for="familyMemberFirstName">First Name</label>
+                            <input type="text" class="form-control" id="familyMemberFirstName" placeholder="Enter first name">
+                        </div>
+                        <div class="form-group">
+                            <label for="familyMemberLastName">Last Name</label>
+                            <input type="text" class="form-control" id="familyMemberLastName" placeholder="Enter last name">
+                        </div>
+                        <div class="form-group">
+                            <label for="familyMemberNin">NIN</label>
+                            <input type="text" class="form-control" id="familyMemberNin" placeholder="Enter NIN">
+                        </div>
+                        <button type="button" class="save-family-btn" onclick="saveFamilyMember()">Save Family Member</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap JS and dependencies -->
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+        function enableEditing() {
+            // Enable all input fields for editing
+            document.getElementById("city").removeAttribute("readonly");
+            document.getElementById("localGovernment").removeAttribute("readonly");
+            document.getElementById("postalCode").removeAttribute("readonly");
+            document.getElementById("address").removeAttribute("readonly");
+
+            // Hide the Edit button and show the Save button
+            document.querySelector(".edit-btn").style.display = "none";
+            document.querySelector(".save-btn").style.display = "block";
+            }
+
+            function showFamilyForm() {
+                document.getElementById('familyMemberForm').style.display = 'block';
+            }
+
+            function saveFamilyMember() {
+                const firstName = document.getElementById('familyMemberFirstName').value;
+                const lastName = document.getElementById('familyMemberLastName').value;
+                const nin = document.getElementById('familyMemberNin').value;
+
+                if (!firstName || !lastName || !nin) {
+                    alert('Please fill in all fields.');
+                    return;
+                }
+
+                // Here you would typically send the new family member data to the backend using AJAX.
+                const familyMember = {
+                    firstName,
+                    lastName,
+                    nin
+                };
+
+                console.log('Family member added:', familyMember);
+
+                // Optionally, add the new member to the list dynamically
+                const familyMembersSection = document.querySelector('.family-members-section .row .col-md-12');
+                const newMemberDiv = document.createElement('div');
+                newMemberDiv.classList.add('family-member');
+                newMemberDiv.innerHTML = `< h5 > ${ firstName } ${ lastName } </h5><p>NIN: ${nin}</p > `;
+                familyMembersSection.appendChild(newMemberDiv);
+
+                // Hide the form after saving
+                document.getElementById('familyMemberForm').style.display = 'none';
+
+                // Clear the form fields
+                document.getElementById('familyMemberFirstName').value = '';
+                document.getElementById('familyMemberLastName').value = '';
+                document.getElementById('familyMemberNin').value = '';
+            }
+    </script>
+</body>
+</html>

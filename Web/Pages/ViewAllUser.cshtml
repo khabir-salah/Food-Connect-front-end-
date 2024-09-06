@@ -1,0 +1,69 @@
+﻿@page
+@model Web.Pages.ViewAllUserModel
+@using Domain.Constant
+@{
+    Layout = "_Layout2";
+}
+<head>
+    <!-- Other head content -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<div class="container mt-5">
+    <h2 class="mb-4">User Details</h2>
+    <div class="table-responsive">
+        <table class="table table-bordered table-striped">
+            <thead class="table-dark">
+                <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Phone Number</th>
+                    <th scope="col">Role</th>
+                    <th scope="col">Activated</th>
+                    <th scope="col">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.model.Data)
+                {
+                    <tr>
+                        <td>@item.Name</td>
+                        <td>@item.Email</td>
+                        <td>@item.PhoneNumber</td>
+                        <td>@item.Role</td>
+                        <td>
+                            @if (item.IsActivated)
+                            {
+                                <span class="badge bg-success">Yes</span>
+                            }
+                            else
+                            {
+                                <span class="badge bg-danger">No</span>
+                            }
+                        </td>
+                        <td>
+                            @if (item.Role == RoleConst.Individual )
+                            {
+                                <a asp-page="/IndividualDetail" asp-route-UserId="@item.UserId" class="btn btn-primary btn-sm">
+                                    View Details
+                                </a>
+                            }
+                            else if (item.Role == RoleConst.OrganizationHead)
+                            {
+                                <a asp-page="/OrganizationDetails" asp-route-UserId="@item.UserId" class="btn btn-secondary btn-sm">
+                                    View Details
+                                </a>
+                            }
+                            else if (item.Role == RoleConst.FamilyHead)
+                            {
+                                <a asp-page="/FamilyHeadDetails" asp-route-UserId="@item.UserId" class="btn btn-secondary btn-sm">
+                                    View Details
+                                </a>
+                            }
+                        </td>
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+    </div>
+</div>

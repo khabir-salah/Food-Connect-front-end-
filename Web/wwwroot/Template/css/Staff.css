@@ -1,0 +1,47 @@
+﻿.detail-container {
+    width: 53%;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+
+}
+
+.image img {
+    padding-bottom: 20px;
+    width: 350px;
+    height: 350px;
+    border-radius: 29%;
+    border: 2px solid white;
+}
+
+
+.inner-container{
+    margin-top: 3%;
+}
+
+.inner-container p, h3{
+    color: white;
+    padding: 10px;
+}
+
+.btn {
+    margin: 10px;
+}
+
+.btn a {
+    background: #253047;
+    width: 30%;
+    text-align: center;
+    padding: 10px;
+    border-radius: 5px;
+    text-decoration: none;
+    color: white;
+}
+
+
+    .btn :hover {
+        background: #b60de1;
+        cursor: pointer;
+        padding: 10px;
+        border-radius: 5px;
+    }

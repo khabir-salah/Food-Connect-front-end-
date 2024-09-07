@@ -1,0 +1,427 @@
+﻿*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    width: 100%;
+    background: #e5e7eb;
+    position: relative;
+    display: flex;
+}
+
+li.signout {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+
+#menu {
+    background-color: #111827;
+    width: 300px;
+    height: 100%;
+    /* below will make the nav bar fix to the heigh of the web 
+        This will affect the second section so go back to the section part of css and adjust*/
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+
+    #menu .logo {
+        display: flex;
+        align-items: center;
+        color: white;
+        padding: 30px 0 0 30px;
+    }
+
+        #menu .logo img {
+            width: 15%;
+            margin-right: 15px;
+        }
+
+    #menu .items {
+        margin-top: 40px;
+    }
+
+        #menu .items li {
+            list-style: none;
+            padding: 15px 0;
+            transition: 0.3s ease;
+        }
+
+
+            /*Hover effect on the li*/
+            #menu .items li:hover {
+                background: #253047;
+                cursor: pointer;
+                border-left: 4px solid white;
+            }
+
+            #menu .items li:nth-child(1) {
+                border-left: 4px solid white;
+            }
+
+
+
+            /*Hover effect on the a and i*/
+            #menu .items li:hover a,
+            #menu .items li:hover i {
+                color: white;
+            }
+
+            #menu .items li i {
+                color: rgba(134, 141, 151);
+                width: 30px;
+                height: 30px;
+                line-height: 30px;
+                text-align: center;
+                font-size: 14px;
+                margin: 0 10px 0 25px;
+            }
+
+
+
+            #menu .items li a {
+                text-decoration: none;
+                color: rgba(134, 141, 151);
+                font-weight: bold;
+                transition: 0.3s ease;
+            }
+
+            #menu .items li :hover a {
+                color: white;
+            }
+
+#interface {
+    width: calc(100% - 300px);
+    margin-left: 300px;
+    position: relative;
+    /*margin-top: -20%;*/
+}
+
+    #interface .navigation {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 15px 30px;
+        background-color: white;
+        border-bottom: 3px solid #594ef7;
+        position: fixed; /*This again will cause the width of the navigation to shrink so 
+        head to the interface above and copy the width as it is and paste here*/
+        width: calc(100% - 300px);
+        top: 0;
+    }
+
+        /* #interface .navigation .n1{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+} */
+
+        /*==================search bar and its icon==================*/
+
+        #interface .navigation .search {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            padding: 10px 14px;
+            border: 1px solid #d7dbe6;
+            border-radius: 4px;
+            box-shadow: 0 5px 15px rgba(0,0,0,.5);
+        }
+
+            #interface .navigation .search i {
+                margin-right: 5px;
+                padding-left: 5px;
+                /*padding-right: 10px;*/
+            }
+
+            #interface .navigation .search input {
+                border: none;
+                outline: none;
+                font-size: 15px;
+                background-color: rgba(255, 255, 255, .1);
+                color: black;
+
+            }
+/*=============================================*/
+/*=============Profile bar==================*/
+.profile-bell {
+    display: flex;
+}
+
+.departments {
+    margin-top: 10%;
+}
+
+
+#interface .navigation .profile {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+    #interface .navigation .profile i {
+        margin-right: 20px;
+        font-size: 19px;
+        font-size: 400;
+    }
+
+    #interface .navigation .profile img {
+        width: 30px;
+        height: 30px;
+        object-fit: cover;
+        border-radius: 50%;
+    }
+
+.n1 {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.n1 .menu-btn {
+    display: none;
+    color: #2b2b2b;
+    font-size: 20px;
+    cursor: pointer;
+    margin-right: 20px;
+}
+
+/* =============Dashboard h3 and boxes under section2 under the profile */
+.i-name {
+    color: #444a53;
+    padding: 30px 30px 0 30px;
+    font-size: 24px;
+    font-weight: bolder;
+    margin-top: 70px;
+}
+
+.values {
+    padding: 30px 30px 0 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+    .values .val-box {
+        background-color: white;
+        width: 235px;
+        padding: 15px 20px;
+        border-radius: 5px;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+    }
+
+        .values .val-box i {
+            font-size: 25px;
+            width: 60px;
+            height: 60px;
+            line-height: 60px;
+            border-radius: 50%;
+            text-align: center;
+            color: white;
+            margin-right: 15px;
+        }
+
+        .values .val-box h3 {
+            font-size: 18px;
+            font-weight: bold;
+
+        }
+
+        .values .val-box h3 {
+            font-size: 15px;
+            color: #828997;
+        }
+
+        .values .val-box:nth-child(1) i {
+            background-color: #7b74ec;
+        }
+
+        .values .val-box:nth-child(2) i {
+            background-color: #5c8af0;
+        }
+
+        .values .val-box:nth-child(3) i {
+            background-color: #e45d99;
+        }
+
+        .values .val-box:nth-child(4) i {
+            background-color: #74daec;
+        }
+
+/* ===========Table below boxes============ */
+.board {
+    width: 94%;
+    margin: 30px 0 30px 30px;
+    overflow: auto;
+    background: white;
+    border-radius: 8px;
+}
+
+.board img {
+        width: 45px;
+        height: 45px;
+        object-fit: cover;
+        border-radius: 50%;
+        margin-right: 15px;
+    }
+
+.board h5 {
+        /*font-weight: bold;*/
+        font-size: 14px;
+    }
+
+.board p {
+        font-size: 15px;
+        /*font-weight: bold;*/
+        color: black;
+    }
+
+.no-Staff {
+    font-size: 15px;
+    font-weight: bold;
+    color: black;
+    padding: 10px;
+}
+
+.board .people {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    text-align: center;
+}
+
+.table {
+    border-collapse: collapse;
+}
+
+tr {
+    border-bottom: 1px solid #eef0f3;
+}
+
+thead td {
+    font-size: 14px;
+    text-transform: uppercase;
+    font-weight: bold;
+    background-color: #f9fafb;
+    text-align: start;
+    padding: 15px;
+}
+
+tbody tr td {
+    padding: 10px 15px;
+}
+
+.active {
+    background-color: #d7fada;
+    padding: 2px 10px;
+    display: inline-block;
+    border-radius: 40px;
+    color: #2b2b2b;
+    margin-top: -28px;
+    margin-left: 12px;
+}
+
+.edit a {
+    text-decoration: none;
+    font-size: 600;
+    color: #554cd1;
+    font-weight: 600;
+    /* list-style: none; */
+}
+
+
+@media (max-width: 769px) {
+    #menu {
+        width: 270px;
+        position: fixed;
+        left: -270px;
+        transition: 0.3s ease;
+    }
+
+        #menu .logo {
+            margin-top: 15px;
+        }
+
+        #menu.active {
+            left: 0px;
+        }
+
+
+    #menu-btn {
+        display: initial;
+    }
+
+    #interface {
+        width: 100%;
+        margin-left: 0px;
+        display: inline-block;
+        transition: 0.3s ease;
+    }
+
+    #menu.active ~ #interface {
+        width: calc(100% -270px);
+        margin-left: 270px;
+    }
+
+
+    #interface .navigation {
+        width: 100%
+    }
+
+    .values {
+        padding: 30px 30px 0 30px;
+        justify-content: flex-start;
+    }
+
+        .values .val-box {
+            padding: 15px 20px;
+            margin: 10px 30px 10px 35px;
+            width: 40%;
+        }
+
+    .board {
+        width: 92%;
+        padding: 0;
+        overflow-x: auto;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+}
+
+
+@media (max-width: 477px) {
+    #interface .navigation {
+        padding: 15px;
+    }
+
+        #interface .navigation .search .input {
+            width: 150px;
+        }
+
+    .i-name {
+        padding: 30px 15px 0px 15px;
+    }
+
+    .values {
+        padding: 15px 15px 0px 15px;
+    }
+
+        .values .val-box {
+            width: 100%;
+            margin: 8px 0;
+        }
+
+    .board {
+        margin: 30px 15px 30px 15px;
+    }
+}

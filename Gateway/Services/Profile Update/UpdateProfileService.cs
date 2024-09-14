@@ -29,7 +29,7 @@ namespace Gateway.Services
 
         public async Task<bool> UpdateIndividualProfileAsync(IndividualProfileUpdateModel request, string token)
         {
-            var apiUrl = "https://localhost:7005/api/Profile/UpdateProfile-Individual";
+            var apiUrl = $"{_httpClient.BaseAddress}api/Profile/UpdateProfile-Individual";
             _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
             string json = JsonConvert.SerializeObject(request);
             var content = new StringContent(json, Encoding.UTF8, "application/json");
@@ -39,7 +39,7 @@ namespace Gateway.Services
 
         public async Task<bool> UpdateOrganizationProfileAsync(OrganizationProfileUpdateModel request, string token)
         {
-            var apiUrl = "https://localhost:7005/api/Profile/UpdateProfile-OrganizationHead";
+            var apiUrl = $"{_httpClient.BaseAddress}api/Profile/UpdateProfile-OrganizationHead";
             _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
             string json = JsonConvert.SerializeObject(request);
             var content = new StringContent(json, Encoding.UTF8, "application/json");
@@ -49,7 +49,7 @@ namespace Gateway.Services
 
         public async Task<bool> UpdateManagerProfileAsync(ManagerProfileUpdateModel request, string token)
         {
-            var apiUrl = "https://localhost:7005/api/Profile/UpdateProfile-Manager";
+            var apiUrl = $"{_httpClient.BaseAddress}api/Profile/UpdateProfile-Manager";
             _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
             string json = JsonConvert.SerializeObject(request);
             var content = new StringContent(json, Encoding.UTF8, "application/json");
@@ -59,7 +59,7 @@ namespace Gateway.Services
 
         public async Task<bool> UpdateFamilyProfileAsync(FamilyUpdateProfileModel request, string token)
         {
-            var apiUrl = "https://localhost:7005/api/Profile/UpdateProfile-FamilyHead";
+            var apiUrl = $"{_httpClient.BaseAddress}api/Profile/UpdateProfile-FamilyHead";
             _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
             string json = JsonConvert.SerializeObject(request);
             var content = new StringContent(json, Encoding.UTF8, "application/json");
@@ -69,7 +69,7 @@ namespace Gateway.Services
 
         public async Task<ViewProfileViewModel> ViewProfileAsync( string token)
         {
-            var apiUrl = "https://localhost:7005/api/Profile/View-Profile";
+            var apiUrl = $"{_httpClient.BaseAddress}api/Profile/View-Profile";
             _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
             var response = await _httpClient.GetAsync(apiUrl);
             var result = await response.ReadContentAs<ViewProfileViewModel>();
@@ -78,7 +78,7 @@ namespace Gateway.Services
 
         public async Task<PaginatedResponse<AllUsersViewModel>> ViewAllUserAsync(string token, int PageNumber = 1, int PageSize = 10)
         {
-            var apiUrl = $"https://localhost:7005/api/Profile/ViewAllUsers?PageNumber={PageNumber}&PageSize={PageSize}";
+            var apiUrl = $"{_httpClient.BaseAddress}api/Profile/ViewAllUsers?PageNumber={PageNumber}&PageSize={PageSize}";
             _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
             var response = await _httpClient.GetAsync(apiUrl);
             var result = await response.ReadContentAs<PaginatedResponse<AllUsersViewModel>>();
@@ -87,14 +87,14 @@ namespace Gateway.Services
 
         public async Task<UserDeatilsModel> UserDetailAsync(Guid donationId)
         {
-            var response = await _httpClient.PutAsync($"https://localHost:7005/api/Profile/details/{donationId}", null);
+            var response = await _httpClient.PutAsync($"{_httpClient.BaseAddress}api/Profile/details/{donationId}", null);
             var result = await response.ReadContentAs<UserDeatilsModel>();
             return result;
         }
 
         public async Task<bool> ValidateUser(Guid userId)
         {
-            var response = await _httpClient.PutAsync($"https://localHost:7005/api/Profile/Validate/{userId}", null);
+            var response = await _httpClient.PutAsync($"{_httpClient.BaseAddress}api/Profile/Validate/{userId}", null);
             return response.IsSuccessStatusCode ? true : false;
         }
     }

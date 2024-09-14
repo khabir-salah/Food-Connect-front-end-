@@ -7,21 +7,13 @@ using System.Threading.Tasks;
 
 namespace Gateway.Managers.Organisation
 {
-    public class RegisterService : IRegisterService
+    public class RegisterService(HttpClient _httpClient) : IRegisterService
     {
-        private readonly HttpClient _httpClient;
-
-
-        public RegisterService(HttpClient httpClient)
-        {
-            _httpClient = httpClient;
-        }
-
         public async Task<LoginResponse> Login(LoginViewModel viewModel)
         {
             string json = JsonSerializer.Serialize(viewModel);
             var content = new StringContent(json, Encoding.UTF8, "application/json");
-            var url = "https://localhost:7005/api/Identity/Login";
+            var url = $"{_httpClient.BaseAddress}api/Identity/Login";
             var response = await _httpClient.PostAsync(url, content);
 
             if(response.IsSuccessStatusCode)
@@ -46,7 +38,7 @@ namespace Gateway.Managers.Organisation
         {
             string json = JsonSerializer.Serialize(viewModel);
             var content = new StringContent(json, Encoding.UTF8, "application/json");
-            var url = "https://localhost:7005/api/Identity/Register-Family";
+            var url = $"{_httpClient.BaseAddress}api/Identity/Register-Family";
             var response = await _httpClient.PostAsync(url, content);
             return response.IsSuccessStatusCode ? true : false;
         }
@@ -55,7 +47,7 @@ namespace Gateway.Managers.Organisation
         {
             string json = JsonSerializer.Serialize(viewModel);
             var content = new StringContent(json, Encoding.UTF8, "application/json");
-            var url = "https://localhost:7005/api/Identity/Register-Individual";
+            var url = $"{_httpClient.BaseAddress}api/Identity/Register-Individual";
             var response = await _httpClient.PostAsync(url, content);
             return response.IsSuccessStatusCode ? true : false;
         }
@@ -64,7 +56,7 @@ namespace Gateway.Managers.Organisation
         {
             string json = JsonSerializer.Serialize(viewModel);
             var content = new StringContent(json, Encoding.UTF8, "application/json");
-            var url = "https://localhost:7005/api/Identity/Register-Manager";
+            var url = $"{_httpClient.BaseAddress}api/Identity/Register-Manager";
             var response = await _httpClient.PostAsync(url, content);
             return response.IsSuccessStatusCode ? true : false;
         }
@@ -73,7 +65,7 @@ namespace Gateway.Managers.Organisation
         {
             string json = JsonSerializer.Serialize(viewModel);
             var content = new StringContent(json, Encoding.UTF8, "application/json");
-            var url = "https://localhost:7005/api/Identity/Register-Organization";
+            var url = $"{_httpClient.BaseAddress}api/Identity/Register-Organization";
             var response = await _httpClient.PostAsync(url, content);
             return response.IsSuccessStatusCode ? true : false;
         }
@@ -82,7 +74,7 @@ namespace Gateway.Managers.Organisation
         {
             string json = JsonSerializer.Serialize(email);
             var content = new StringContent(json, Encoding.UTF8, "application/json");
-            var url = "https://localhost:7005/api/Identity/forgot-password";
+            var url = $"{_httpClient.BaseAddress}api/Identity/forgot-password";
             var response = await _httpClient.PostAsync(url, content);
             return response.IsSuccessStatusCode ? true : false;
         }

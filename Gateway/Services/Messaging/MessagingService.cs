@@ -28,7 +28,7 @@ namespace Gateway.Services.Messaging
         {
             string json = JsonSerializer.Serialize(request);
             var content = new StringContent(json, Encoding.UTF8, "application/json");
-            var url = "https://localhost:7005/api/Message/Donation-Available";
+            var url = $"{_httpClient.BaseAddress}api/Message/Donation-Available";
             _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
             var response = await _httpClient.PostAsync(url, content);
             return response.IsSuccessStatusCode ? true : false;
@@ -36,7 +36,7 @@ namespace Gateway.Services.Messaging
 
         public async Task<bool> MarkDonationAsReceived(MessageModel request, string token)
         {
-            var url = "https://localhost:7005/api/Message/mark-received";
+            var url = $"{_httpClient.BaseAddress}api/Message/mark-received";
             _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
             string json = JsonSerializer.Serialize(request);
             var content = new StringContent(json, Encoding.UTF8, "application/json");
@@ -63,7 +63,7 @@ namespace Gateway.Services.Messaging
 
         public async Task<DonationWithMessagesView> GetDonationWithMessages(Guid donationId, string token)
         {
-            var url = $"https://localhost:7005/api/Message/{donationId}";
+            var url = $"{_httpClient.BaseAddress}api/Message/{donationId}";
             _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
             var response = await _httpClient.GetAsync(url);
             var result = await response.ReadContentAs<DonationWithMessagesView>();
@@ -73,7 +73,7 @@ namespace Gateway.Services.Messaging
 
         public async Task<ICollection<DonationReviewViewModel>> Review( string token)
         {
-            var url = $"https://localhost:7005/api/Message/Reviews";
+            var url = $"{_httpClient.BaseAddress}api/Message/Reviews";
             _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
             var response = await _httpClient.GetAsync(url);
             var result = await response.ReadContentAs<ICollection<DonationReviewViewModel>>();
@@ -82,7 +82,7 @@ namespace Gateway.Services.Messaging
 
         public async Task<ICollection<DonationReviewViewModel>> AllInappropriateReview(string token)
         {
-            var url = $"https://localhost:7005/api/Message/AllReviews";
+            var url = $"{_httpClient.BaseAddress}api/Message/AllReviews";
             _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
             var response = await _httpClient.GetAsync(url);
             var result = await response.ReadContentAs<ICollection<DonationReviewViewModel>>();

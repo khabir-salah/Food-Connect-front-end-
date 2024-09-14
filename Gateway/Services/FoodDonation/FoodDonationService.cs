@@ -31,7 +31,7 @@ namespace Gateway.Services.FoodDonation
 
         public async Task<PaginatedResponse<AllDonationViewModel>> AllDonations(DonationsModel choice, string token, int PageNumber = 1, int PageSize = 30)
         {
-            var apiUrl = $"https://localhost:7005/api/Donation/AllDonations?Status={choice.status}&PageNumber={PageNumber}&PageSize={PageSize}";
+            var apiUrl = $"{_httpClient.BaseAddress}api/Donation/AllDonations?Status={choice.status}&PageNumber={PageNumber}&PageSize={PageSize}";
             _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
             var response = await _httpClient.GetAsync(apiUrl);
             var result = await response.ReadContentAs<PaginatedResponse<AllDonationViewModel>>();
@@ -40,7 +40,7 @@ namespace Gateway.Services.FoodDonation
 
         public async Task<PaginatedResponse<UserDonationViewModel>> ReceiveFoodDonation(string token, int PageNumber = 1, int PageSize = 30)
         {
-            var apiUrl = $"https://localhost:7005/api/Donation/AllUserClaimableDonations?PageNumber={PageNumber}&PageSize={PageSize}";
+            var apiUrl = $"{_httpClient.BaseAddress}api/Donation/AllUserClaimableDonations?PageNumber={PageNumber}&PageSize={PageSize}";
             _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
             var response = await _httpClient.GetAsync(apiUrl);
             var result = await response.ReadContentAs<PaginatedResponse<UserDonationViewModel>>();
@@ -49,7 +49,7 @@ namespace Gateway.Services.FoodDonation
 
         public async Task<PaginatedResponse<UserDonationViewModel>> ReceivableFoodDonation(string token, int PageNumber = 1, int PageSize = 30)
         {
-            var apiUrl = $"https://localhost:7005/api/Donation/AllUserDonations?PageNumber={PageNumber}&PageSize={PageSize}";
+            var apiUrl = $"{_httpClient.BaseAddress}api/Donation/AllUserDonations?PageNumber={PageNumber}&PageSize={PageSize}";
             _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
             var response = await _httpClient.GetAsync(apiUrl);
             var result = await response.ReadContentAs<PaginatedResponse<UserDonationViewModel>>();
@@ -131,7 +131,7 @@ namespace Gateway.Services.FoodDonation
         public async Task<PaginatedResponse<UserDonationViewModel>> SearchDonations(string token, string location, int? minQuantity, int? maxQuantity)
         {
             var queryString = $"?location={location}&minQuantity={minQuantity}&maxQuantity={maxQuantity}";
-            var apiUrl = $"https://localhost:7005/api/Donation/Search{queryString}";
+            var apiUrl = $"{_httpClient.BaseAddress}api/Donation/Search{queryString}";
 
             _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
 
@@ -143,7 +143,7 @@ namespace Gateway.Services.FoodDonation
         public async Task<ICollection<UserDonationViewModel>> SearchAllDonations(string token, string location, int? minQuantity, int? maxQuantity)
         {
             var queryString = $"?location={location}&minQuantity={minQuantity}&maxQuantity={maxQuantity}";
-            var apiUrl = $"https://localhost:7005/api/Donation/AllSearch{queryString}";
+            var apiUrl = $"{_httpClient.BaseAddress}api/Donation/AllSearch{queryString}";
 
             _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
 
@@ -165,14 +165,14 @@ namespace Gateway.Services.FoodDonation
         public async Task<bool> ApproveByManager(Guid donationId, string token)
         {
             _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
-            var response = await _httpClient.PutAsync($"https://localHost:7005/api/Donation/approve/{donationId}", null);
+            var response = await _httpClient.PutAsync($"{_httpClient.BaseAddress}api/Donation/approve/{donationId}", null);
             return response.IsSuccessStatusCode ? true : false;
         }
 
         public async Task<bool> ClaimDonation(Guid donationId, string token)
         {
             _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
-            var response = await _httpClient.PutAsync($"https://localHost:7005/api/Donation/Claim/{donationId}", null);
+            var response = await _httpClient.PutAsync($"{_httpClient.BaseAddress}api/Donation/Claim/{donationId}", null);
             return response.IsSuccessStatusCode ? true : false;
         }
 

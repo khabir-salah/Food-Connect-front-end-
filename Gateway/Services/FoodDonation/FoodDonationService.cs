@@ -60,7 +60,7 @@ namespace Gateway.Services.FoodDonation
         {
             //string json = JsonSerializer.Serialize(request);
             //var content = new StringContent(json, Encoding.UTF8, "application/json");
-            var url = "https://localhost:7005/api/Donation/Create";
+            var url = $"{_httpClient.BaseAddress}api/Donation/Create";
 
             using (var content = new MultipartFormDataContent())
             {
@@ -101,7 +101,7 @@ namespace Gateway.Services.FoodDonation
 
         public async Task<ICollection<UserDonationViewModel>> GetClaimedDonations(string token)
         {
-            var apiUrl = "https://localhost:7005/api/Donation/claimedbyUser";
+            var apiUrl = $"{_httpClient.BaseAddress}api/Donation/claimedbyUser";
             _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
             var response = await _httpClient.GetAsync(apiUrl);
 
@@ -115,7 +115,7 @@ namespace Gateway.Services.FoodDonation
 
         public async Task<ICollection<UserDonationViewModel>> GetClaimedDonationsByOther(string token)
         {
-            var apiUrl = "https://localhost:7005/api/Donation/claimedbyOtherUser";
+            var apiUrl = $"{_httpClient.BaseAddress}api/Donation/claimedbyOtherUser";
             _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
             var response = await _httpClient.GetAsync(apiUrl);
             if (response.StatusCode == HttpStatusCode.NoContent)
@@ -180,7 +180,7 @@ namespace Gateway.Services.FoodDonation
         {
             string json = JsonSerializer.Serialize(request);
             var content = new StringContent(json, Encoding.UTF8, "application/json");
-            var url = "https://localhost:7005/api/Donation/Disapprove";
+            var url = $"{_httpClient.BaseAddress}api/Donation/Disapprove";
             _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
             var response = await _httpClient.PostAsync(url, content);
             return response.IsSuccessStatusCode ? true : false;
@@ -189,7 +189,7 @@ namespace Gateway.Services.FoodDonation
 
          public async Task<ICollection<UserDonationViewModel>> UserExpiredDonations(string token)
         {
-            var apiUrl = "https://localhost:7005/api/Donation/Expired";
+            var apiUrl = $"{_httpClient.BaseAddress}api/Donation/Expired";
 
             _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
             var response = await _httpClient.GetAsync(apiUrl);
@@ -199,7 +199,7 @@ namespace Gateway.Services.FoodDonation
 
         public async Task<ICollection<UserDonationViewModel>> UserApprovedDonations(string token)
         {
-            var apiUrl = "https://localhost:7005/api/Donation/Approved";
+            var apiUrl = $"{_httpClient.BaseAddress}api/Donation/Approved";
             
             _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
             var response = await _httpClient.GetAsync(apiUrl);
@@ -209,7 +209,7 @@ namespace Gateway.Services.FoodDonation
 
         public async Task<ICollection<UserDonationViewModel>> UserDisapprovedDonations( string token)
         {
-            var apiUrl = "https://localhost:7005/api/Donation/Disapprove";
+            var apiUrl = $"{_httpClient.BaseAddress}api/Donation/Disapprove";
             
             _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
             var response = await _httpClient.GetAsync(apiUrl);
@@ -219,7 +219,7 @@ namespace Gateway.Services.FoodDonation
 
         public async Task<ICollection<UserDonationViewModel>> UserPendingDonations( string token)
         {
-            var apiUrl = "https://localhost:7005/api/Donation/Pending";
+            var apiUrl = $"{_httpClient.BaseAddress}api/Donation/Pending";
             
             _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
             var response = await _httpClient.GetAsync(apiUrl);
@@ -229,7 +229,7 @@ namespace Gateway.Services.FoodDonation
 
         public async Task<ICollection<UserDonationViewModel>> UserReceivedDonations( string token)
         {
-            var apiUrl = "https://localhost:7005/api/Donation/Received";
+            var apiUrl = $"{_httpClient.BaseAddress}api/Donation/Received";
            
             _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
             var response = await _httpClient.GetAsync(apiUrl);
@@ -239,7 +239,7 @@ namespace Gateway.Services.FoodDonation
 
         public async Task<DonationTypeViewModel> ViewDonationType(string token)
         {
-            var apiUrl = "https://localhost:7005/api/Donation/Count";
+            var apiUrl = $"{_httpClient.BaseAddress}api/Donation/Count";
             _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
             var response = await _httpClient.GetAsync(apiUrl);
             var result = await response.ReadContentAs<DonationTypeViewModel>();
@@ -248,7 +248,7 @@ namespace Gateway.Services.FoodDonation
 
         public async Task<DonationTypeViewModel> DonationCount(string token)
         {
-            var apiUrl = "https://localhost:7005/api/Donation/GetAllDOnationCount";
+            var apiUrl = $"{_httpClient.BaseAddress}api/Donation/GetAllDOnationCount";
             _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
             var response = await _httpClient.GetAsync(apiUrl);
             var result = await response.ReadContentAs<DonationTypeViewModel>();

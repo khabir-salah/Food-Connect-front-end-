@@ -25,34 +25,34 @@ Food Connect is a comprehensive solution that tackles the critical issue of food
 ## 📸 Screenshots
 
 ### Landing Page
-![Dashboard](Api/wwwroot/Screenshot/landingpage.png)
+![Dashboard](Web/wwwroot/Screenshot/landingpage.png)
 
 ### User Registration(individual)
-![Dashboard](Api/wwwroot/Screenshot/registerindividual.png)
+![Dashboard](Web/wwwroot/Screenshot/registerindividual.png)
 
 ### Request for email verification after registration
-![Donation Page](Api/wwwroot/Screenshot/emailverification.png)
+![Donation Page](Web/wwwroot/Screenshot/emailverification.png)
 
 ### User Dashboard
-![Dashboard](Api/wwwroot/Screenshot/dashboard.png)
+![Dashboard](Web/wwwroot/Screenshot/dashboard.png)
 
 ### Admin Dashboard
-![Dashboard](Api/wwwroot/Screenshot/users.png)
+![Dashboard](Web/wwwroot/Screenshot/users.png)
 
 ### User Can Claim Donation... but there is restriction in claiming
-![Dashboard](Api/wwwroot/Screenshot/receivefood.png)
+![Dashboard](Web/wwwroot/Screenshot/receivefood.png)
 
 ### Restriction
-![Dashboard](Api/wwwroot/Screenshot/claimablefood.png)
+![Dashboard](Web/wwwroot/Screenshot/claimablefood.png)
 
 ### Chat interface
-![Dashboard](Api/wwwroot/Screenshot/recipientchat.png)
+![Dashboard](Web/wwwroot/Screenshot/recipientchat.png)
 
 ### Chat Interface
-![Chat Interface](Api/wwwroot/Screenshot/donorchat.png)
+![Chat Interface](Web/wwwroot/Screenshot/donorchat.png)
 
 ### Users can see review given on a particular donation
-![Dashboard](Api/wwwroot/Screenshot/review.png)
+![Dashboard](Web/wwwroot/Screenshot/review.png)
 
 
 
